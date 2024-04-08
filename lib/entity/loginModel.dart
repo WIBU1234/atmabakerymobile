@@ -1,28 +1,31 @@
 import 'dart:convert';
 
-class Login {
+class LoginModel {
   String? token;
   String username;
   String password;
+  String? role;
 
-  Login({
+  LoginModel({
     this.token,
     required this.username,
     required this.password,
+    this.role,
   });
 
   // Create Empty Login Model
-  factory Login.empty() => Login(
-    username: '', 
+  factory LoginModel.empty() => LoginModel(
+    username: '',
     password: ''
   );
 
   // Update Placement
-  factory Login.fromRawJson(String str) => Login.fromJson(json.decode(str));
-  factory Login.fromJson(Map<String, dynamic> json) => Login(
+  factory LoginModel.fromRawJson(String str) => LoginModel.fromJson(json.decode(str));
+  factory LoginModel.fromJson(Map<String, dynamic> json) => LoginModel(
     token: json['token'],
     username: json['username'],
     password: json['password'],
+    role: json['role'],
   );
 
   String toRawJson() => json.encode(toJson());
@@ -30,5 +33,6 @@ class Login {
     'token': token,
     'username': username,
     'password': password,
+    'role': role,
   };
 }
