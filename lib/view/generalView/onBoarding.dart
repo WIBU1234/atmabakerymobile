@@ -49,7 +49,7 @@ class _OnBoardingState extends State<OnBoarding> {
                   child: Container(
                     width: screenWidth * 0.86,
                     height: screenHeight * 0.2,
-                    color: Colors.black,
+                    color: Colors.white,
                   ),
 
 
