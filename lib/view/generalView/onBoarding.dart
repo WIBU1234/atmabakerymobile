@@ -49,10 +49,10 @@ class _OnBoardingState extends State<OnBoarding> {
                   child: Container(
                     width: screenWidth * 0.86,
                     height: screenHeight * 0.2,
-                    color: Colors.white,
+                    color: Colors.black,
                   ),
 
-                  
+
                   // child: const Text(
                   //   'Asu Koe',
                   //   style: TextStyle(
