@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:atmabakerymobile/anotherComponent/onboardingComponent/OnBoardingList.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
+import 'package:atmabakerymobile/view/generalView/login.dart';
 
 class OnBoarding extends StatefulWidget {
   const OnBoarding({super.key});
@@ -122,7 +123,7 @@ class _OnBoardingState extends State<OnBoarding> {
                                   ),
 
                                   onPressed: () {
-                                    Navigator.pushReplacementNamed(context, '/login');
+                                    Navigator.push(context, MaterialPageRoute(builder: (_) => const LoginPage()));
                                   },
 
                                   child: const Text(
