@@ -2,6 +2,7 @@ import 'package:atmabakerymobile/apiFunction/loginFunction.dart';
 import 'package:atmabakerymobile/entity/loginModel.dart';
 import 'package:atmabakerymobile/view/CustomerView/dashboardCustomer.dart';
 import 'package:atmabakerymobile/view/MOView/dashboardMO.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -15,6 +16,7 @@ class LoginPage extends StatefulWidget {
 
 class _LoginPageState extends State<LoginPage> {
   final _formKey = GlobalKey<FormState>();
+  bool _isObscure = true;
 
   //text editing controller
   final emailController = TextEditingController();
@@ -153,19 +155,31 @@ class _LoginPageState extends State<LoginPage> {
                               ),
                               const SizedBox(height: 4),
                               TextField(
+                                obscureText: _isObscure,
                                 controller: passwordController,
-                                decoration: const InputDecoration(
+                                decoration: InputDecoration(
                                   filled: true,
                                   fillColor: Color(0xFFC3C3B9),
-                                  enabledBorder: OutlineInputBorder(
+                                  enabledBorder: const OutlineInputBorder(
                                     borderSide: BorderSide(color: Colors.white, width: 2.0)
                                   ),
-                                  focusedBorder: OutlineInputBorder(
+                                  focusedBorder: const OutlineInputBorder(
                                     borderSide: BorderSide(color: Colors.white, width: 2.0)
                                   ),
                                   hintText: 'Ketik Password Anda Disini ...',
                                   hintStyle: TextStyle(color: Colors.black),
-                                  contentPadding: EdgeInsets.symmetric(vertical: 15.0, horizontal: 15.0)
+                                  contentPadding: EdgeInsets.symmetric(vertical: 15.0, horizontal: 15.0),
+                                  suffixIcon: GestureDetector(
+                                    onTap:() {
+                                      setState(() {
+                                        _isObscure = !_isObscure;
+                                      });
+                                    },
+                                    child: Icon(
+                                      _isObscure ? Icons.visibility_off : Icons.visibility,
+                                      color: Colors.grey.shade100,
+                                    ),
+                                  )
                                 ),
                               ),
                             ],
@@ -204,9 +218,7 @@ class _LoginPageState extends State<LoginPage> {
                         const SizedBox(height: 10),
                         GestureDetector(
                           onTap: () {
-                            if (_formKey.currentState!.validate()) {
-                              //_loginUser();
-                            }
+                            //
                           },
                           child: Container(
                             padding: const EdgeInsets.all(16.0),

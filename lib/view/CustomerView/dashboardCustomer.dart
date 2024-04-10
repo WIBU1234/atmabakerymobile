@@ -14,6 +14,6 @@ class _DashboardCustomerPageState extends State<DashboardCustomerPage> {
       appBar: AppBar(
         title: const Text('Customer View'),
       ),
-    );;
+    );
   }
 }

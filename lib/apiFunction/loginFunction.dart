@@ -22,9 +22,9 @@ class LoginHelper{
         })
       );
 
-      print("Response status code: ${apiResult.statusCode}");
-      print("Response resason : ${apiResult.reasonPhrase}");
-      print("body: ${apiResult.body}");
+      // print("Response status code: ${apiResult.statusCode}");
+      // print("Response resason : ${apiResult.reasonPhrase}");
+      // print("body: ${apiResult.body}");
 
       if(apiResult.statusCode == 200) {
         return LoginModel.fromJson(
