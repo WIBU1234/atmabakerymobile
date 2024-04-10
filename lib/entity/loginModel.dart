@@ -2,36 +2,36 @@ import 'dart:convert';
 
 class LoginModel {
   String? token;
-  String username;
+  String email;
   String password;
   String? role;
 
   LoginModel({
     this.token,
-    required this.username,
+    required this.email,
     required this.password,
     this.role,
   });
 
   // Create Empty Login Model
   factory LoginModel.empty() => LoginModel(
-    username: '',
+    email: '',
     password: ''
   );
 
   // Update Placement
   factory LoginModel.fromRawJson(String str) => LoginModel.fromJson(json.decode(str));
   factory LoginModel.fromJson(Map<String, dynamic> json) => LoginModel(
-    token: json['token'],
-    username: json['username'],
-    password: json['password'],
+    token: json['access_token'],
+    email: json['user']['email'],
+    password: json['user']['password'],
     role: json['role'],
   );
 
   String toRawJson() => json.encode(toJson());
   Map<String, dynamic> toJson() => {
     'token': token,
-    'username': username,
+    'email': email,
     'password': password,
     'role': role,
   };
