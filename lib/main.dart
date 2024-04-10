@@ -1,3 +1,4 @@
+import 'package:atmabakerymobile/view/generalView/login.dart';
 import 'package:flutter/material.dart';
 
 // View
@@ -18,7 +19,7 @@ class MyApp extends StatelessWidget {
         // colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),        
         useMaterial3: true,
       ),
-      home: const OnBoarding(),
+      home: const LoginPage(),
     );
   }
 }
