@@ -1,5 +1,7 @@
 import 'package:atmabakerymobile/apiFunction/loginFunction.dart';
 import 'package:atmabakerymobile/entity/loginModel.dart';
+import 'package:atmabakerymobile/view/CustomerView/dashboardCustomer.dart';
+import 'package:atmabakerymobile/view/MOView/dashboardMO.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -44,6 +46,12 @@ class _LoginPageState extends State<LoginPage> {
                 duration: Duration(seconds: 2),
               )
             );
+
+          if (result.role == 'MO') {
+            Navigator.push(context, MaterialPageRoute(builder: (context) => const DashboardMOPage()));
+          } else {
+            Navigator.push(context, MaterialPageRoute(builder: (context) => const DashboardCustomerPage()));
+          }
         }
       });
     }
