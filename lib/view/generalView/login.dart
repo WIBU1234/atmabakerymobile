@@ -32,7 +32,7 @@ class _LoginPageState extends State<LoginPage> {
       final password = passwordController.text;
 
       LoginHelper.login(email: email, password: password).then((result) async {
-        if (result == LoginModel.empty()) {
+        if (result.email == '' && result.password == '') {
           ScaffoldMessenger.of(context).showSnackBar(
               const SnackBar(
                 content: Text('Invalid email or password'),
