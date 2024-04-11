@@ -114,7 +114,7 @@ class _LoginPageState extends State<LoginPage> {
                                 ],
                               ),
                               const SizedBox(height: 4),
-                              TextField(
+                              TextFormField(
                                 controller: emailController,
                                 decoration: const InputDecoration(
                                   filled: true,
@@ -127,8 +127,11 @@ class _LoginPageState extends State<LoginPage> {
                                   ),
                                   hintText: 'Ketik Email Anda Disini ...',
                                   hintStyle: TextStyle(color: Colors.black),
-                                  contentPadding: EdgeInsets.symmetric(vertical: 15.0, horizontal: 15.0)
+                                  contentPadding: EdgeInsets.symmetric(vertical: 15.0, horizontal: 15.0),
+                                  errorStyle: TextStyle(color: Colors.grey)
                                 ),
+                                validator:(value) => value == '' ? 'Please enter your email' : null,
+                                
                               ),
                             ],
                           ),
@@ -154,7 +157,7 @@ class _LoginPageState extends State<LoginPage> {
                                 ],
                               ),
                               const SizedBox(height: 4),
-                              TextField(
+                              TextFormField(
                                 obscureText: _isObscure,
                                 controller: passwordController,
                                 decoration: InputDecoration(
@@ -179,8 +182,10 @@ class _LoginPageState extends State<LoginPage> {
                                       _isObscure ? Icons.visibility_off : Icons.visibility,
                                       color: Colors.grey.shade100,
                                     ),
-                                  )
+                                  ),
+                                  errorStyle: const TextStyle(color: Colors.grey)
                                 ),
+                                validator:(value) => value == '' ? 'Please enter your password' : null,
                               ),
                             ],
                           ),
