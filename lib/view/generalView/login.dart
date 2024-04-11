@@ -78,178 +78,216 @@ class _LoginPageState extends State<LoginPage> {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Center(
-                    //Login
-          
-                    // Box Container
-                    child: Container(
-                      width: 0.80 * screenWidth,
-                      height: 0.60 * screenHeight,
-                      decoration: BoxDecoration(
-                        border: Border.all(
-                          color: Colors.white,
-                          width: 5
-                        ),
-                        borderRadius: BorderRadius.circular(20.0)
+                  Stack(
+                    children: [
+                      Container(
+                        width: screenWidth,
+                        height: 0.65 * screenHeight
                       ),
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                        // Textfield Email
-                        Padding(
-                          padding: const EdgeInsets.symmetric(horizontal: 16.0),
-                          child: Column(
-                            children: [
-                              Row(
-                                children: [
-                                  Text(
-                                    'Email', 
-                                    style: GoogleFonts.sora(
-                                      textStyle: const TextStyle(
-                                        color: Colors.white,
-                                        fontWeight: FontWeight.w600,
-                                        fontSize: 16,
-                                      )),
-                                  ),
-                                ],
+                      Positioned(
+                        bottom: 0,
+                        left: 0,
+                        right: 0,
+                        child: Center(
+                          // Box Container
+                          child: Container(
+                            width: 0.80 * screenWidth,
+                            height: 0.61 * screenHeight,
+                            decoration: BoxDecoration(
+                              border: Border.all(
+                                color: Colors.white,
+                                width: 5
                               ),
-                              const SizedBox(height: 4),
-                              TextFormField(
-                                controller: emailController,
-                                decoration: const InputDecoration(
-                                  filled: true,
-                                  fillColor: Color(0xFFC3C3B9),
-                                  enabledBorder: OutlineInputBorder(
-                                    borderSide: BorderSide(color: Colors.white, width: 2.0)
-                                  ),
-                                  focusedBorder: OutlineInputBorder(
-                                    borderSide: BorderSide(color: Colors.white, width: 2.0)
-                                  ),
-                                  hintText: 'Ketik Email Anda Disini ...',
-                                  hintStyle: TextStyle(color: Colors.black),
-                                  contentPadding: EdgeInsets.symmetric(vertical: 15.0, horizontal: 15.0),
-                                  errorStyle: TextStyle(color: Colors.grey)
+                              borderRadius: BorderRadius.circular(20.0)
+                            ),
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                              // Textfield Email
+                              Padding(
+                                padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                                child: Column(
+                                  children: [
+                                    Row(
+                                      children: [
+                                        Text(
+                                          'Email', 
+                                          style: GoogleFonts.sora(
+                                            textStyle: const TextStyle(
+                                              color: Colors.white,
+                                              fontWeight: FontWeight.w600,
+                                              fontSize: 16,
+                                            )),
+                                        ),
+                                      ],
+                                    ),
+                                    const SizedBox(height: 4),
+                                    TextFormField(
+                                      controller: emailController,
+                                      decoration: const InputDecoration(
+                                        filled: true,
+                                        fillColor: Color(0xFFC3C3B9),
+                                        enabledBorder: OutlineInputBorder(
+                                          borderSide: BorderSide(color: Colors.white, width: 2.0)
+                                        ),
+                                        focusedBorder: OutlineInputBorder(
+                                          borderSide: BorderSide(color: Colors.white, width: 2.0)
+                                        ),
+                                        hintText: 'Ketik Email Anda Disini ...',
+                                        hintStyle: TextStyle(color: Colors.black),
+                                        contentPadding: EdgeInsets.symmetric(vertical: 15.0, horizontal: 15.0),
+                                        errorStyle: TextStyle(color: Colors.grey)
+                                      ),
+                                      validator:(value) => value == '' ? 'Please enter your email' : null,
+                                      
+                                    ),
+                                  ],
                                 ),
-                                validator:(value) => value == '' ? 'Please enter your email' : null,
-                                
                               ),
-                            ],
-                          ),
-                        ),
-                        
-                        //Texfield Password
-                        const SizedBox(height: 35),
-                        Padding(
-                          padding: const EdgeInsets.symmetric(horizontal: 16.0),
-                          child: Column(
-                            children: [
-                              Row(
-                                children: [
-                                  Text(
-                                    'Password', 
-                                    style: GoogleFonts.sora(
-                                      textStyle: const TextStyle(
-                                        color: Colors.white,
-                                        fontWeight: FontWeight.w600,
-                                        fontSize: 16,
-                                      )),
-                                  ),
-                                ],
+                              
+                              //Texfield Password
+                              const SizedBox(height: 35),
+                              Padding(
+                                padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                                child: Column(
+                                  children: [
+                                    Row(
+                                      children: [
+                                        Text(
+                                          'Password', 
+                                          style: GoogleFonts.sora(
+                                            textStyle: const TextStyle(
+                                              color: Colors.white,
+                                              fontWeight: FontWeight.w600,
+                                              fontSize: 16,
+                                            )),
+                                        ),
+                                      ],
+                                    ),
+                                    const SizedBox(height: 4),
+                                    TextFormField(
+                                      obscureText: _isObscure,
+                                      controller: passwordController,
+                                      decoration: InputDecoration(
+                                        filled: true,
+                                        fillColor: Color(0xFFC3C3B9),
+                                        enabledBorder: const OutlineInputBorder(
+                                          borderSide: BorderSide(color: Colors.white, width: 2.0)
+                                        ),
+                                        focusedBorder: const OutlineInputBorder(
+                                          borderSide: BorderSide(color: Colors.white, width: 2.0)
+                                        ),
+                                        hintText: 'Ketik Password Anda Disini ...',
+                                        hintStyle: TextStyle(color: Colors.black),
+                                        contentPadding: EdgeInsets.symmetric(vertical: 15.0, horizontal: 15.0),
+                                        suffixIcon: GestureDetector(
+                                          onTap:() {
+                                            setState(() {
+                                              _isObscure = !_isObscure;
+                                            });
+                                          },
+                                          child: Icon(
+                                            _isObscure ? Icons.visibility_off : Icons.visibility,
+                                            color: Colors.grey.shade100,
+                                          ),
+                                        ),
+                                        errorStyle: const TextStyle(color: Colors.grey)
+                                      ),
+                                      validator:(value) => value == '' ? 'Please enter your password' : null,
+                                    ),
+                                  ],
+                                ),
                               ),
-                              const SizedBox(height: 4),
-                              TextFormField(
-                                obscureText: _isObscure,
-                                controller: passwordController,
-                                decoration: InputDecoration(
-                                  filled: true,
-                                  fillColor: Color(0xFFC3C3B9),
-                                  enabledBorder: const OutlineInputBorder(
-                                    borderSide: BorderSide(color: Colors.white, width: 2.0)
+                              // Login Button
+                              const SizedBox(height: 35),
+                              GestureDetector(
+                                onTap: () {
+                                  if (_formKey.currentState!.validate()) {
+                                    _loginUser();
+                                  }
+                                },
+                                child: Container(
+                                  padding: const EdgeInsets.all(16.0),
+                                  margin: const EdgeInsets.symmetric(horizontal: 16.0),
+                                  decoration:  BoxDecoration(
+                                    color: const Color(0xFFC67C4E),
+                                    borderRadius: BorderRadius.circular(8)
                                   ),
-                                  focusedBorder: const OutlineInputBorder(
-                                    borderSide: BorderSide(color: Colors.white, width: 2.0)
-                                  ),
-                                  hintText: 'Ketik Password Anda Disini ...',
-                                  hintStyle: TextStyle(color: Colors.black),
-                                  contentPadding: EdgeInsets.symmetric(vertical: 15.0, horizontal: 15.0),
-                                  suffixIcon: GestureDetector(
-                                    onTap:() {
-                                      setState(() {
-                                        _isObscure = !_isObscure;
-                                      });
-                                    },
-                                    child: Icon(
-                                      _isObscure ? Icons.visibility_off : Icons.visibility,
-                                      color: Colors.grey.shade100,
+                                  child: Center(
+                                    child: Text(
+                                      'Log In',
+                                      style: GoogleFonts.sora(
+                                        textStyle: const TextStyle(
+                                          color: Colors.white,
+                                          fontSize: 16,
+                                          fontWeight: FontWeight.w600
+                                        )
+                                      ),
                                     ),
                                   ),
-                                  errorStyle: const TextStyle(color: Colors.grey)
                                 ),
-                                validator:(value) => value == '' ? 'Please enter your password' : null,
                               ),
-                            ],
+                              // Forgot Password Button
+                              const SizedBox(height: 10),
+                              GestureDetector(
+                                onTap: () {
+                                  //
+                                },
+                                child: Container(
+                                  padding: const EdgeInsets.all(16.0),
+                                  margin: const EdgeInsets.symmetric(horizontal: 16.0),
+                                  decoration:  BoxDecoration(
+                                    color: const Color(0xFF0500FF),
+                                    borderRadius: BorderRadius.circular(8)
+                                  ),
+                                  child: Center(
+                                    child: Text(
+                                      'Forgot Password',
+                                      style: GoogleFonts.sora(
+                                        textStyle: const TextStyle(
+                                          color: Colors.white,
+                                          fontSize: 16,
+                                          fontWeight: FontWeight.w600
+                                        )
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              ),         
+                              // @ Explore your taste right now
+                              ],
+                            ),
                           ),
                         ),
-                        // Login Button
-                        const SizedBox(height: 35),
-                        GestureDetector(
-                          onTap: () {
-                            if (_formKey.currentState!.validate()) {
-                              _loginUser();
-                            }
-                          },
-                          child: Container(
-                            padding: const EdgeInsets.all(16.0),
-                            margin: const EdgeInsets.symmetric(horizontal: 16.0),
-                            decoration:  BoxDecoration(
-                              color: const Color(0xFFC67C4E),
-                              borderRadius: BorderRadius.circular(8)
-                            ),
-                            child: Center(
-                              child: Text(
-                                'Log In',
-                                style: GoogleFonts.sora(
-                                  textStyle: const TextStyle(
-                                    color: Colors.white,
-                                    fontSize: 16,
-                                    fontWeight: FontWeight.w600
-                                  )
-                                ),
-                              ),
-                            ),
-                          ),
-                        ),
-                        // Forgot Password Button
-                        const SizedBox(height: 10),
-                        GestureDetector(
-                          onTap: () {
-                            //
-                          },
-                          child: Container(
-                            padding: const EdgeInsets.all(16.0),
-                            margin: const EdgeInsets.symmetric(horizontal: 16.0),
-                            decoration:  BoxDecoration(
-                              color: const Color(0xFF0500FF),
-                              borderRadius: BorderRadius.circular(8)
-                            ),
-                            child: Center(
-                              child: Text(
-                                'Forgot Password',
-                                style: GoogleFonts.sora(
-                                  textStyle: const TextStyle(
-                                    color: Colors.white,
-                                    fontSize: 16,
-                                    fontWeight: FontWeight.w600
-                                  )
-                                ),
-                              ),
-                            ),
-                          ),
-                        ),         
-                        // @ Explore your taste right now
-                        ],
                       ),
-                    ),
+                      Center(
+                        child: Container(
+                          width: 0.30 * screenWidth,
+                          height: 0.08 * screenHeight,
+                          decoration: BoxDecoration(
+                            color: Colors.black,
+                            border: Border.all(
+                              color: Colors.white,
+                              width: 5
+                            ),
+                            borderRadius: BorderRadius.circular(20.0)
+                          ),
+                          child: Center(
+                            child: Text(
+                              'Login',
+                              style: GoogleFonts.sora(
+                                textStyle: const TextStyle(
+                                  color: Colors.white,
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 30
+                                )
+                              ),
+                            ),
+                          ),
+                        ),
+                      ),
+                    ],
+                    
                   )
                 ],
               ),
