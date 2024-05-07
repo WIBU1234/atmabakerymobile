@@ -1,60 +1,50 @@
 import 'package:atmabakerymobile/apiFunction/loginFunction.dart';
 import 'package:atmabakerymobile/view/CustomerView/dashboardCustomer.dart';
 import 'package:atmabakerymobile/view/MOView/dashboardMO.dart';
-import 'package:atmabakerymobile/view/generalView/forgotPassword.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-class LoginPage extends StatefulWidget {
-  const LoginPage({super.key});
+class ForgotPasswordPage extends StatefulWidget {
+  const ForgotPasswordPage({super.key});
 
   @override
-  State<LoginPage> createState() => _LoginPageState();
+  State<ForgotPasswordPage> createState() => _ForgotPasswordPageState();
 }
 
-class _LoginPageState extends State<LoginPage> {
+class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
   final _formKey = GlobalKey<FormState>();
-  bool _isObscure = true;
 
   //text editing controller
   final emailController = TextEditingController();
-  final passwordController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
     double screenWidth = MediaQuery.of(context).size.width;
     double screenHeight = MediaQuery.of(context).size.height;
 
-    void _loginUser() {
-      final email = emailController.text;
-      final password = passwordController.text;
+  void _forgotPassword(){
+    final email = emailController.text;
 
-      LoginHelper.login(email: email, password: password).then((result) async {
-        if (result.email == '' && result.password == '') {
-          ScaffoldMessenger.of(context).showSnackBar(
-              const SnackBar(
-                content: Text('Invalid email or password'),
-                backgroundColor: Colors.red,
-                duration: Duration(seconds: 2),
-              )
-            );
-        } else {
-          ScaffoldMessenger.of(context).showSnackBar(
-              const SnackBar(
-                content: Text('Login Success'),
-                backgroundColor: Colors.blue,
-                duration: Duration(seconds: 2),
-              )
-            );
-
-          if (result.role == 'MO') {
-            Navigator.push(context, MaterialPageRoute(builder: (context) => const DashboardMOPage()));
-          } else {
-            Navigator.push(context, MaterialPageRoute(builder: (context) => const DashboardCustomerPage()));
-          }
-        }
-      });
-    }
+    LoginHelper.sendEmail(email: email).then((result) async {
+      if (result.email == '') {
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(
+            content: Text('Invalid email'),
+            backgroundColor: Colors.red,
+            duration: Duration(seconds: 2),
+          )
+        );
+      } else {
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(
+            content: Text('Email sent'),
+            backgroundColor: Colors.blue,
+            duration: Duration(seconds: 2),
+          )
+        );
+      }
+    });
+  }
 
     return Scaffold(
       body: SafeArea(
@@ -80,28 +70,30 @@ class _LoginPageState extends State<LoginPage> {
                     children: [
                       Container(
                         width: screenWidth,
-                        height: 0.65 * screenHeight
+                        height: 0.65 * screenHeight,
+                        // color: Colors.black,
                       ),
                       Positioned(
-                        bottom: 0,
                         left: 0,
                         right: 0,
+                        top: 0.04 * screenHeight,
                         child: Center(
                           // Box Container
                           child: Container(
                             width: 0.80 * screenWidth,
-                            height: 0.61 * screenHeight,
+                            height: 0.4 * screenHeight,
                             decoration: BoxDecoration(
                               border: Border.all(
                                 color: Colors.white,
                                 width: 2.8
                               ),
-                              borderRadius: BorderRadius.circular(20.0)
+                              borderRadius: BorderRadius.circular(14.0)
                             ),
                             child: Column(
-                              mainAxisAlignment: MainAxisAlignment.center,
+                              mainAxisAlignment: MainAxisAlignment.start,
                               children: [
                               // Textfield Email
+                              SizedBox(height: screenHeight * 0.07),
                               Padding(
                                 padding: const EdgeInsets.symmetric(horizontal: 16.0),
                                 child: Column(
@@ -143,65 +135,12 @@ class _LoginPageState extends State<LoginPage> {
                                 ),
                               ),
                               
-                              //Texfield Password
-                              const SizedBox(height: 35),
-                              Padding(
-                                padding: const EdgeInsets.symmetric(horizontal: 16.0),
-                                child: Column(
-                                  children: [
-                                    Row(
-                                      children: [
-                                        Text(
-                                          'Password', 
-                                          style: GoogleFonts.sora(
-                                            textStyle: const TextStyle(
-                                              color: Colors.white,
-                                              fontWeight: FontWeight.w600,
-                                              fontSize: 16,
-                                            )),
-                                        ),
-                                      ],
-                                    ),
-                                    const SizedBox(height: 4),
-                                    TextFormField(
-                                      obscureText: _isObscure,
-                                      controller: passwordController,
-                                      decoration: InputDecoration(
-                                        filled: true,
-                                        fillColor: Color(0xFFC3C3B9),
-                                        enabledBorder: const OutlineInputBorder(
-                                          borderSide: BorderSide(color: Colors.white, width: 2.0)
-                                        ),
-                                        focusedBorder: const OutlineInputBorder(
-                                          borderSide: BorderSide(color: Colors.white, width: 2.0)
-                                        ),
-                                        hintText: 'Ketik Password Anda Disini ...',
-                                        hintStyle: TextStyle(color: Colors.black),
-                                        contentPadding: EdgeInsets.symmetric(vertical: 15.0, horizontal: 15.0),
-                                        suffixIcon: GestureDetector(
-                                          onTap:() {
-                                            setState(() {
-                                              _isObscure = !_isObscure;
-                                            });
-                                          },
-                                          child: Icon(
-                                            _isObscure ? Icons.visibility_off : Icons.visibility,
-                                            color: Colors.grey.shade100,
-                                          ),
-                                        ),
-                                        errorStyle: const TextStyle(color: Colors.grey)
-                                      ),
-                                      validator:(value) => value == '' ? 'Please enter your password' : null,
-                                    ),
-                                  ],
-                                ),
-                              ),
                               // Login Button
                               const SizedBox(height: 35),
                               GestureDetector(
                                 onTap: () {
                                   if (_formKey.currentState!.validate()) {
-                                    _loginUser();
+                                    _forgotPassword();
                                   }
                                 },
                                 child: Container(
@@ -213,7 +152,7 @@ class _LoginPageState extends State<LoginPage> {
                                   ),
                                   child: Center(
                                     child: Text(
-                                      'Log In',
+                                      'Kirim Email',
                                       style: GoogleFonts.sora(
                                         textStyle: const TextStyle(
                                           color: Colors.white,
@@ -229,7 +168,7 @@ class _LoginPageState extends State<LoginPage> {
                               const SizedBox(height: 10),
                               GestureDetector(
                                 onTap: () {
-                                  Navigator.push(context, MaterialPageRoute(builder: (context) => const ForgotPasswordPage()));
+                                  Navigator.pop(context);
                                 },
                                 child: Container(
                                   padding: const EdgeInsets.all(16.0),
@@ -240,7 +179,7 @@ class _LoginPageState extends State<LoginPage> {
                                   ),
                                   child: Center(
                                     child: Text(
-                                      'Forgot Password',
+                                      'Back To Login',
                                       style: GoogleFonts.sora(
                                         textStyle: const TextStyle(
                                           color: Colors.white,
@@ -259,7 +198,7 @@ class _LoginPageState extends State<LoginPage> {
                       ),
                       Center(
                         child: Container(
-                          width: 0.36 * screenWidth,
+                          width: 0.64 * screenWidth,
                           height: 0.08 * screenHeight,
                           decoration: BoxDecoration(
                             color: Colors.black,
@@ -267,16 +206,16 @@ class _LoginPageState extends State<LoginPage> {
                               color: Colors.white,
                               width: 2.8
                             ),
-                            borderRadius: BorderRadius.circular(16.0)
+                            borderRadius: BorderRadius.circular(14.0)
                           ),
                           child: Center(
                             child: Text(
-                              'Login',
+                              'Forgot Password',
                               style: GoogleFonts.sora(
-                                textStyle: const TextStyle(
+                                textStyle: TextStyle(
                                   color: Colors.white,
                                   fontWeight: FontWeight.bold,
-                                  fontSize: 30
+                                  fontSize: screenHeight * 0.03
                                 )
                               ),
                             ),

@@ -38,4 +38,31 @@ class LoginHelper{
       throw Exception(e.toString());
     }
   }
+
+  static Future<LoginModel> sendEmail({required String email}) async {
+    String apiURL = 'http://'+url+endpoint+'/forget-password';
+    try{
+      var apiResult = await client.post(
+        Uri.parse(apiURL), 
+        headers: {"Content-Type": "application/json"},
+        body: jsonEncode({
+          'email': email
+        })
+      );
+
+      // print("Response status code: ${apiResult.statusCode}");
+      // print("Response resason : ${apiResult.reasonPhrase}");
+      // print("body: ${apiResult.body}");
+
+      if(apiResult.statusCode == 200) {
+        return LoginModel.fromJson(
+          json.decode(apiResult.body)
+        );
+      } else {
+        return LoginModel.empty();
+      }
+    }catch(e){
+      throw Exception(e.toString());
+    }
+  }
 }
