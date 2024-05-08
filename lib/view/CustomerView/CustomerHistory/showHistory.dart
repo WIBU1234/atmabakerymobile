@@ -17,7 +17,7 @@ class ShowHistory extends StatefulWidget {
 class _ShowHistoryState extends State<ShowHistory> {
   List<History> listHistory = [];
   bool isLoading = true;
-
+  bool  isProses = true;
   final searchProduk = TextEditingController();
 
   String search = '';
@@ -29,15 +29,18 @@ class _ShowHistoryState extends State<ShowHistory> {
   }
 
   void loadData() async {
+    isProses = true;
     if (searchProduk.text != '') {
       listHistory = await HistoryHelper.search(Nama_produk: searchProduk.text);
       setState(() {
         isLoading = false;
+        isProses = false;
       });
     } else {
       listHistory = await HistoryHelper.show();
       setState(() {
         isLoading = false;
+        isProses = false;
       });
     }
   }
@@ -89,45 +92,55 @@ class _ShowHistoryState extends State<ShowHistory> {
                         child: const Icon(Icons.search),
                       ),
                     ),
-                    validator: (value) {
-                      if (value == null || value.isEmpty) {
-                        return 'Keterangan tidak boleh kosong';
-                      }
-                      return null;
-                    },
                   ),
                 ),
-                  ListView.builder(
-                    shrinkWrap: true,
-                    physics: const NeverScrollableScrollPhysics(),
-                    itemCount: listHistory.length,
-                    itemBuilder: (context, index) {
-                      return Container(
-                        margin: const EdgeInsets.only(left: 20, right: 20, bottom: 10),
-                        height: 100,
-                        width: double.infinity,
-                        color: Colors.grey[200],
-                        child: ListTile(
-                          title: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Text(listHistory[index].ID_Transaksi.toString()),
-                              Text(listHistory[index].Nama_Produk.toString()),
-                              Text(listHistory[index].Tanggal_Transaksi.toString()),
-                            ],
+                Container(
+                  child: isProses ? (
+                    const Center(
+                      child: CircularProgressIndicator(),
+                    ) 
+                  ) : (
+                    Container(
+                      child: listHistory.isEmpty ? (
+                        const Text('Data Tidak Ditemukan')
+                      ) : (
+                        Container(
+                          child: ListView.builder(
+                            shrinkWrap: true,
+                            physics: const NeverScrollableScrollPhysics(),
+                            itemCount: listHistory.length,
+                            itemBuilder: (context, index) {
+                              return Container(
+                                margin: const EdgeInsets.only(left: 20, right: 20, bottom: 10),
+                                height: 100,
+                                width: double.infinity,
+                                color: Colors.grey[200],
+                                child: ListTile(
+                                  title: Column(
+                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                    children: [
+                                      Text(listHistory[index].ID_Transaksi.toString()),
+                                      Text(listHistory[index].Nama_Produk.toString()),
+                                      Text(listHistory[index].Tanggal_Transaksi.toString()),
+                                    ],
+                                  ),
+                                  trailing: Column(
+                                    mainAxisSize: MainAxisSize.min,
+                                    crossAxisAlignment: CrossAxisAlignment.end,
+                                    children: [
+                                      Text(listHistory[index].Total_Transaksi.toString(), style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 13)),
+                                      Text(listHistory[index].Status.toString())
+                                    ]
+                                  ),
+                                ),
+                              ); 
+                            },
                           ),
-                          trailing: Column(
-                            mainAxisSize: MainAxisSize.min,
-                            crossAxisAlignment: CrossAxisAlignment.end,
-                            children: [
-                              Text(listHistory[index].Total_Transaksi.toString(), style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 13)),
-                              Text(listHistory[index].Status.toString())
-                            ]
-                          ),
-                        ),
-                      ); 
-                    },
-                  ),
+                        )
+                      )
+                    ) 
+                  )
+                )
                 ],
               ),
       ),
