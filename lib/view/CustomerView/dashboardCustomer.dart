@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:atmabakerymobile/view/CustomerView/CustomerHistory/showHistory.dart';
+import 'package:atmabakerymobile/view/CustomerView/CustomerProfile/showProfile.dart';
 
 class DashboardCustomerPage extends StatefulWidget {
   const DashboardCustomerPage({super.key});
@@ -21,7 +22,7 @@ class _DashboardCustomerPageState extends State<DashboardCustomerPage> {
         break;
 
       case 1:
-        child = const Text('Profile');
+        child = const ShowProfile();
         break;
     }
     return Scaffold(
