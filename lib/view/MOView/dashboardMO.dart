@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:atmabakerymobile/entity/loginModel.dart';
+
 import 'package:atmabakerymobile/view/MOView/MOPresensi/insertPresensi.dart';
+import 'package:atmabakerymobile/view/MOView/MOPresensi/showPresensi.dart';
 
 class DashboardMOPage extends StatefulWidget {
   const DashboardMOPage({super.key});
@@ -21,7 +22,7 @@ class _DashboardMOPageState extends State<DashboardMOPage> {
         break;
 
       case 1:
-        child = const Text('Tampil Presensi');
+        child = const ShowPresensi();
         break;
 
       case 2:

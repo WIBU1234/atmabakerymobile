@@ -16,19 +16,26 @@ class InsertPresensi extends StatefulWidget {
 
 class _InsertPresensiState extends State<InsertPresensi> {
   final _formKey = GlobalKey<FormState>();
+  bool isLoading = true;
   List<Pegawai> listPegawai = [];
+  Presensi presensi = Presensi.empty();
 
   void loadData() async {
     listPegawai = await PegawaiHelper.show();
+    setState(() {
+      isLoading = false;
+    });
   }
 
   @override
   void initState() {
-    loadData();
     super.initState();
+    loadData();
   }
 
   final keteranganController = TextEditingController();
+  final idPegawaiController = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     double screenWidth = MediaQuery.of(context).size.width;
@@ -37,7 +44,7 @@ class _InsertPresensiState extends State<InsertPresensi> {
     return Scaffold(
       body: SingleChildScrollView(
         scrollDirection: Axis.vertical,
-        child : listPegawai.isEmpty ? (
+        child : isLoading ? (
           const Center(
             child: CircularProgressIndicator(),
           ) 
@@ -47,9 +54,9 @@ class _InsertPresensiState extends State<InsertPresensi> {
             child: Column(
               children: [
                 Container(
-                  margin: const EdgeInsets.only(top: 20),
+                  margin: const EdgeInsets.only(top: 20 , bottom: 20, left: 20, right: 20),
                   child: const Text(
-                    'Insert Presensi',
+                    'Input Presensi',
                     style: TextStyle(
                       fontSize: 20,
                       fontWeight: FontWeight.bold,
@@ -57,7 +64,7 @@ class _InsertPresensiState extends State<InsertPresensi> {
                   ),
                 ),
                 Container(
-                  margin: const EdgeInsets.only(top: 20),
+                  margin: const EdgeInsets.only(top: 20 , bottom: 20, left: 20, right: 20),
                   child: DropdownButtonFormField<Pegawai>(
                     decoration: const InputDecoration(
                       border: OutlineInputBorder(),
@@ -71,13 +78,13 @@ class _InsertPresensiState extends State<InsertPresensi> {
                     }).toList(),
                     onChanged: (Pegawai? value) {
                       setState(() {
-                        keteranganController.text = value!.Nama_Pegawai.toString();
+                        idPegawaiController.text = value!.ID_Pegawai.toString();
                       });
                     },
                   ),
                 ),
                 Container(
-                  margin: const EdgeInsets.only(top: 20),
+                  margin: const EdgeInsets.only(top: 20 , bottom: 20, left: 20, right: 20),
                   child: TextFormField(
                     controller: keteranganController,
                     decoration: const InputDecoration(
@@ -92,25 +99,28 @@ class _InsertPresensiState extends State<InsertPresensi> {
                     },
                   ),
                 ),
-                // Container(
-                //   margin: const EdgeInsets.only(top: 20),
-                //   child: ElevatedButton(
-                //     onPressed: () async {
-                //       if (_formKey.currentState!.validate()) {
-                //         Presensi presensi = Presensi(
-                //           ID_Pegawai: listPegawai[0].ID_Pegawai?.toInt(),
-                //           Keterangan: keteranganController.text,
-                //         );
-                //         await PresensiHelper.presensi(
-                //           parseInt(presensi.ID_Pegawai.toString())
-                //           presensi.Keterangan.toString(),
-                //         );
-                //         Navigator.pop(context);
-                //       }
-                //     },
-                //     child: const Text('Submit'),
-                //   ),
-                // ),
+                Container(
+                  margin: const EdgeInsets.only(top: 20),
+                  child: ElevatedButton(
+                    onPressed: () async {
+                      if (_formKey.currentState!.validate()) {
+                        Presensi presensi = Presensi(
+                          ID_Pegawai: int.parse(idPegawaiController.text),
+                          Keterangan: keteranganController.text,
+                        );
+
+                        await PresensiHelper.presensi(ID_Pegawai: presensi.ID_Pegawai, Keterangan : presensi.Keterangan);
+                        
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          const SnackBar(
+                            content: Text('Data berhasil disimpan'),
+                          ),
+                        );
+                      }
+                    },
+                    child: const Text('Submit'),
+                  ),
+                ),
               ],
             ),
           )
