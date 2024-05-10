@@ -1,6 +1,4 @@
 import 'package:atmabakerymobile/apiFunction/loginFunction.dart';
-import 'package:atmabakerymobile/view/CustomerView/dashboardCustomer.dart';
-import 'package:atmabakerymobile/view/MOView/dashboardMO.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -26,7 +24,7 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
     final email = emailController.text;
 
     LoginHelper.sendEmail(email: email).then((result) async {
-      if (result.email == '') {
+      if (result == false) {
         ScaffoldMessenger.of(context).showSnackBar(
           const SnackBar(
             content: Text('Invalid email'),

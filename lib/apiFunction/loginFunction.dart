@@ -1,8 +1,10 @@
 // import 'dart:convert';
 import 'dart:convert';
+import 'dart:ffi';
 import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:atmabakerymobile/entity/loginModel.dart';
+import 'package:atmabakerymobile/entity/customerModel.dart';
 import 'package:atmabakerymobile/apiFunction/GlobalURL.dart';
 
 class LoginHelper{
@@ -54,9 +56,9 @@ class LoginHelper{
     }
   }
 
-  static Future<LoginModel> sendEmail({required String email}) async {
+  static Future<bool> sendEmail({required String email}) async {
     String apiURL = 'http://'+url+endpoint+'/forget-password';
-    try{
+
       var apiResult = await client.post(
         Uri.parse(apiURL), 
         headers: {"Content-Type": "application/json"},
@@ -65,19 +67,14 @@ class LoginHelper{
         })
       );
 
-      // print("Response status code: ${apiResult.statusCode}");
-      // print("Response resason : ${apiResult.reasonPhrase}");
-      // print("body: ${apiResult.body}");
+      print("Response status code: ${apiResult.statusCode}");
+      print("Response resason : ${apiResult.reasonPhrase}");
+      print("body: ${apiResult.body}");
 
-      if(apiResult.statusCode == 200) {
-        return LoginModel.fromJson(
-          json.decode(apiResult.body)
-        );
+      if (apiResult.statusCode == 200) {
+        return true;
       } else {
-        return LoginModel.empty();
+        return false;
       }
-    }catch(e){
-      throw Exception(e.toString());
-    }
   }
 }
