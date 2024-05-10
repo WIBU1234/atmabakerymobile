@@ -2,21 +2,21 @@ import 'dart:convert';
 
 class Customer {
   int? idCustomer;
-  String namaCustomer;
-  String email;
-  String noTelp;
-  int poin;
-  double saldo;
+  String? namaCustomer;
+  String? email;
+  String? noTelp;
+  int? poin;
+  double? saldo;
   int? otp;
   String? profileImage;
 
   Customer({
     this.idCustomer,
-    required this.namaCustomer,
-    required this.email,
-    required this.noTelp,
-    required this.poin,
-    required this.saldo,
+    this.namaCustomer,
+    this.email,
+    this.noTelp,
+    this.poin,
+    this.saldo,
     this.otp,
     this.profileImage,
   });
@@ -35,13 +35,12 @@ class Customer {
   // Update Placement
   factory Customer.fromRawJson(String str) => Customer.fromJson(json.decode(str));
   factory Customer.fromJson(Map<String, dynamic> json) => Customer(
-    idCustomer: json['idCustomer'],
-    namaCustomer: json['namaCustomer'],
+    idCustomer: json['ID_Customer'],
+    namaCustomer: json['Nama_Customer'],
     email: json['email'],
-    noTelp: json['noTelp'],
-    poin: json['poin'],
-    saldo: json['saldo'],
-    otp: json['otp'],
+    noTelp: json['Nomor_telepon'],
+    // poin: json['poin'],
+    // saldo: json['saldo'],
     profileImage: json['profileImage'],
   );
 
