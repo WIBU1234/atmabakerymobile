@@ -1,3 +1,5 @@
+// ignore_for_file: file_names
+
 import 'package:atmabakerymobile/anotherComponent/onboardingComponent/OnBoardingModel.dart';
 
 class OnBoardingItems{

@@ -1,3 +1,5 @@
+// ignore_for_file: file_names
+
 import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'package:atmabakerymobile/apiFunction/loginFunction.dart';
@@ -10,7 +12,7 @@ class CustomerHelper {
   static const endpoint = GlobalURL.endpoint;
 
   static Future<Customer> showProfile() async {
-    String apiURL = 'http://'+url+endpoint+'/customer';
+    String apiURL = 'http://$url$endpoint/customer';
     String token = await LoginHelper().getToken();
     try {
       var apiResult = await client.get(
@@ -20,11 +22,6 @@ class CustomerHelper {
           "Authorization": "Bearer $token",
         }
       );
-
-      print('URL : ${apiURL}');
-      print('status code : ${apiResult.statusCode}');
-      print('reason : ${apiResult.reasonPhrase}');
-      print('body : ${apiResult.body}');
 
       if (apiResult.statusCode == 200) {
         return Customer.fromJson(json.decode(apiResult.body)['data']);
