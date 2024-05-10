@@ -127,8 +127,7 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
                                         contentPadding: EdgeInsets.symmetric(vertical: 15.0, horizontal: 15.0),
                                         errorStyle: TextStyle(color: Colors.grey)
                                       ),
-                                      validator:(value) => value == '' ? 'Please enter your email' : null,
-                                      
+                                      validator:(value) => value == '' ? 'Please enter your email' : null,                                      
                                     ),
                                   ],
                                 ),
