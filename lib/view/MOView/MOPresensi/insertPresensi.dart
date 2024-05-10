@@ -1,11 +1,11 @@
+// ignore_for_file: file_names
+
 import 'package:atmabakerymobile/apiFunction/pegawaiFunction.dart';
 import 'package:atmabakerymobile/apiFunction/presensiFunction.dart';
 
 import 'package:atmabakerymobile/entity/pegawaiModel.dart';
 import 'package:atmabakerymobile/entity/presensiModel.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 
 class InsertPresensi extends StatefulWidget {
   const InsertPresensi({super.key});
@@ -38,9 +38,6 @@ class _InsertPresensiState extends State<InsertPresensi> {
 
   @override
   Widget build(BuildContext context) {
-    double screenWidth = MediaQuery.of(context).size.width;
-    double screenHeight = MediaQuery.of(context).size.height;
-
     return Scaffold(
       body: SingleChildScrollView(
         scrollDirection: Axis.vertical,
@@ -111,6 +108,7 @@ class _InsertPresensiState extends State<InsertPresensi> {
 
                         await PresensiHelper.presensi(ID_Pegawai: presensi.ID_Pegawai, Keterangan : presensi.Keterangan);
                         
+                        // ignore: use_build_context_synchronously
                         ScaffoldMessenger.of(context).showSnackBar(
                           const SnackBar(
                             content: Text('Data berhasil disimpan'),

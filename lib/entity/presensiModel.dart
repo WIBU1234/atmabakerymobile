@@ -1,3 +1,5 @@
+// ignore_for_file: file_names, non_constant_identifier_names
+
 import 'dart:convert';
 
 class Presensi {
@@ -5,6 +7,7 @@ class Presensi {
   String? Keterangan;
   String? Tanggal;
   String? Nama_Pegawai;
+  // ignore: prefer_typing_uninitialized_variables
   var list;
 
   Presensi({
