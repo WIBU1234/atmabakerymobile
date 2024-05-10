@@ -136,22 +136,22 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
                                       ),
                                       const SizedBox(height: 4),
                                       TextFormField(
-                                        controller: emailController,
-                                        decoration: const InputDecoration(
-                                          filled: true,
-                                          fillColor: Color(0xFFC3C3B9),
-                                          enabledBorder: OutlineInputBorder(
-                                            borderSide: BorderSide(color: Colors.white, width: 2.0)
+                                          controller: emailController,
+                                          decoration: InputDecoration(
+                                            filled: true,
+                                            fillColor: const Color(0xFFC3C3B9).withOpacity(0.7),
+                                            enabledBorder: const OutlineInputBorder(
+                                              borderSide: BorderSide(color: Colors.white, width: 2.0)
+                                            ),
+                                            focusedBorder: const OutlineInputBorder(
+                                              borderSide: BorderSide(color: Colors.white, width: 2.0)
+                                            ),
+                                            hintText: 'Ketik Email Anda Disini ...',
+                                            hintStyle: const TextStyle(color: Colors.black),
+                                            contentPadding: const EdgeInsets.symmetric(vertical: 15.0, horizontal: 15.0),
+                                            errorStyle: const TextStyle(color: Colors.grey)
                                           ),
-                                          focusedBorder: OutlineInputBorder(
-                                            borderSide: BorderSide(color: Colors.white, width: 2.0)
-                                          ),
-                                          hintText: 'Ketik Email Anda Disini ...',
-                                          hintStyle: TextStyle(color: Colors.black),
-                                          contentPadding: EdgeInsets.symmetric(vertical: 15.0, horizontal: 15.0),
-                                          errorStyle: TextStyle(color: Colors.white, fontSize: 15.0)
-                                        ),
-                                        validator: (value) => value == '' ? 'Please enter your email' : null,                                      
+                                          style: const TextStyle(color: Colors.black),                                   
                                       ),
                                     ],
                                   ),
