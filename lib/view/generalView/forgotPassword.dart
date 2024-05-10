@@ -1,8 +1,12 @@
 // ignore_for_file: file_names
 
+// Function Import
 import 'package:atmabakerymobile/apiFunction/loginFunction.dart';
+
+// Material Import
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:awesome_snackbar_content/awesome_snackbar_content.dart';
 
 class ForgotPasswordPage extends StatefulWidget {
   const ForgotPasswordPage({super.key});
@@ -22,30 +26,46 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
     double screenWidth = MediaQuery.of(context).size.width;
     double screenHeight = MediaQuery.of(context).size.height;
 
-  void forgotPassword(){
-    final email = emailController.text;
+    void forgotPassword(){
+      final email = emailController.text;
 
-    LoginHelper.sendEmail(email: email).then((result) async {
-      if (result == false) {
-        ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(
-            content: Text('Invalid email'),
-            backgroundColor: Colors.red,
-            duration: Duration(seconds: 2),
-          )
-        );
-      } else {
-        ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(
-            content: Text('Email sent'),
-            backgroundColor: Colors.blue,
-            duration: Duration(seconds: 2),
-          )
-        );
-        Navigator.pop(context);
-      }
-    });
-  }
+      LoginHelper.sendEmail(email: email).then((result) async {
+        if (result == false) {
+          final snackBar = SnackBar(
+            elevation: 0,
+            backgroundColor: Colors.transparent,
+            content: AwesomeSnackbarContent(
+              title: 'Send Failed',
+              message: 'Invalid email!',
+              contentType: ContentType.failure,
+              inMaterialBanner: true,
+            ),
+          );
+
+          ScaffoldMessenger.of(context)
+            ..hideCurrentSnackBar()
+            ..showSnackBar(snackBar);
+        } else {
+          final snackBar = SnackBar(
+            elevation: 0,
+            backgroundColor: Colors.transparent,
+            content: AwesomeSnackbarContent(
+              title: 'Send Email Success',
+              message: 'Please check your email for changing password!',
+              contentType: ContentType.success,
+              inMaterialBanner: true,
+            ),
+          );
+
+          ScaffoldMessenger.of(context)
+            ..hideCurrentSnackBar()
+            ..showSnackBar(snackBar);
+
+          
+          Navigator.pop(context);
+        }
+      });
+    }
 
     return Scaffold(
       body: SafeArea(
@@ -91,109 +111,115 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
                               ),
                               borderRadius: BorderRadius.circular(14.0)
                             ),
-                            child: Column(
-                              mainAxisAlignment: MainAxisAlignment.start,
-                              children: [
-                              // Textfield Email
-                              SizedBox(height: screenHeight * 0.07),
-                              Padding(
-                                padding: const EdgeInsets.symmetric(horizontal: 16.0),
-                                child: Column(
-                                  children: [
-                                    Row(
-                                      children: [
-                                        Text(
-                                          'Email', 
-                                          style: GoogleFonts.sora(
-                                            textStyle: const TextStyle(
-                                              color: Colors.white,
-                                              fontWeight: FontWeight.w600,
-                                              fontSize: 16,
-                                            )),
-                                        ),
-                                      ],
-                                    ),
-                                    const SizedBox(height: 4),
-                                    TextFormField(
-                                      controller: emailController,
-                                      decoration: const InputDecoration(
-                                        filled: true,
-                                        fillColor: Color(0xFFC3C3B9),
-                                        enabledBorder: OutlineInputBorder(
-                                          borderSide: BorderSide(color: Colors.white, width: 2.0)
-                                        ),
-                                        focusedBorder: OutlineInputBorder(
-                                          borderSide: BorderSide(color: Colors.white, width: 2.0)
-                                        ),
-                                        hintText: 'Ketik Email Anda Disini ...',
-                                        hintStyle: TextStyle(color: Colors.black),
-                                        contentPadding: EdgeInsets.symmetric(vertical: 15.0, horizontal: 15.0),
-                                        errorStyle: TextStyle(color: Colors.grey)
+                            child: SingleChildScrollView(
+                              child: Column(
+                                mainAxisAlignment: MainAxisAlignment.start,
+                                children: [
+                                // Textfield Email
+                                SizedBox(height: screenHeight * 0.07),
+                                Padding(
+                                  padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                                  child: Column(
+                                    children: [
+                                      Row(
+                                        children: [
+                                          Text(
+                                            'Email', 
+                                            style: GoogleFonts.sora(
+                                              textStyle: const TextStyle(
+                                                color: Colors.white,
+                                                fontWeight: FontWeight.w600,
+                                                fontSize: 16,
+                                              )),
+                                          ),
+                                        ],
                                       ),
-                                      validator:(value) => value == '' ? 'Please enter your email' : null,
-                                      
-                                    ),
-                                  ],
-                                ),
-                              ),
-                              
-                              // Login Button
-                              const SizedBox(height: 35),
-                              GestureDetector(
-                                onTap: () {
-                                  if (_formKey.currentState!.validate()) {
-                                    forgotPassword();
-                                  }
-                                },
-                                child: Container(
-                                  padding: const EdgeInsets.all(16.0),
-                                  margin: const EdgeInsets.symmetric(horizontal: 16.0),
-                                  decoration:  BoxDecoration(
-                                    color: const Color(0xFFC67C4E),
-                                    borderRadius: BorderRadius.circular(8)
-                                  ),
-                                  child: Center(
-                                    child: Text(
-                                      'Kirim Email',
-                                      style: GoogleFonts.sora(
-                                        textStyle: const TextStyle(
-                                          color: Colors.white,
-                                          fontSize: 16,
-                                          fontWeight: FontWeight.w600
-                                        )
+                                      const SizedBox(height: 4),
+                                      TextFormField(
+                                        controller: emailController,
+                                        decoration: const InputDecoration(
+                                          filled: true,
+                                          fillColor: Color(0xFFC3C3B9),
+                                          enabledBorder: OutlineInputBorder(
+                                            borderSide: BorderSide(color: Colors.white, width: 2.0)
+                                          ),
+                                          focusedBorder: OutlineInputBorder(
+                                            borderSide: BorderSide(color: Colors.white, width: 2.0)
+                                          ),
+                                          hintText: 'Ketik Email Anda Disini ...',
+                                          hintStyle: TextStyle(color: Colors.black),
+                                          contentPadding: EdgeInsets.symmetric(vertical: 15.0, horizontal: 15.0),
+                                          errorStyle: TextStyle(color: Colors.white, fontSize: 15.0)
+                                        ),
+                                        validator: (value) => value == '' ? 'Please enter your email' : null,                                      
                                       ),
-                                    ),
+                                    ],
                                   ),
                                 ),
-                              ),
-                              // Forgot Password Button
-                              const SizedBox(height: 10),
-                              GestureDetector(
-                                onTap: () {
-                                  Navigator.pop(context);
-                                },
-                                child: Container(
-                                  padding: const EdgeInsets.all(16.0),
-                                  margin: const EdgeInsets.symmetric(horizontal: 16.0),
-                                  decoration:  BoxDecoration(
-                                    color: const Color(0xFF0500FF),
-                                    borderRadius: BorderRadius.circular(8)
-                                  ),
-                                  child: Center(
-                                    child: Text(
-                                      'Back To Login',
-                                      style: GoogleFonts.sora(
-                                        textStyle: const TextStyle(
-                                          color: Colors.white,
-                                          fontSize: 16,
-                                          fontWeight: FontWeight.w600
-                                        )
+                                
+                                // Login Button
+                                const SizedBox(height: 24),
+                                InkWell(
+                                  onTap: () {
+                                    if (_formKey.currentState!.validate()) {
+                                      forgotPassword();
+                                    }
+                                  },
+                                  child: Container(
+                                    margin: const EdgeInsets.symmetric(horizontal: 16.0),
+                                    child: Material(
+                                      color: const Color(0xFFC67C4E),
+                                      borderRadius: BorderRadius.circular(8),
+                                      child: Padding(
+                                        padding: const EdgeInsets.all(16.0),
+                                        child: Center(
+                                          child: Text(
+                                            'Kirim Email',
+                                            style: GoogleFonts.sora(
+                                              textStyle: const TextStyle(
+                                                color: Colors.white,
+                                                fontSize: 16,
+                                                fontWeight: FontWeight.w600,
+                                              ),
+                                            ),
+                                          ),
+                                        ),
                                       ),
                                     ),
                                   ),
                                 ),
+
+                                // Forgot Password Button
+                                const SizedBox(height: 10),
+                                  InkWell(
+                                    onTap: () {
+                                      Navigator.pop(context);
+                                    },
+                                    child: Container(
+                                      margin: const EdgeInsets.symmetric(horizontal: 16.0),
+                                      child: Material(
+                                        color: const Color(0xFF0500FF),
+                                        borderRadius: BorderRadius.circular(8),
+                                        child: Padding(
+                                          padding: const EdgeInsets.all(16.0),
+                                          child: Center(
+                                            child: Text(
+                                              'Back To Login',
+                                              style: GoogleFonts.sora(
+                                                textStyle: const TextStyle(
+                                                  color: Colors.white,
+                                                  fontSize: 16,
+                                                  fontWeight: FontWeight.w600,
+                                                ),
+                                              ),
+                                            ),
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                ],
                               ),
-                              ],
                             ),
                           ),
                         ),

@@ -1,9 +1,13 @@
+// View Import
 import 'package:atmabakerymobile/apiFunction/loginFunction.dart';
 import 'package:atmabakerymobile/view/CustomerView/dashboardCustomer.dart';
 import 'package:atmabakerymobile/view/MOView/dashboardMO.dart';
 import 'package:atmabakerymobile/view/generalView/forgotPassword.dart';
+
+// Material Import
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:awesome_snackbar_content/awesome_snackbar_content.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
@@ -31,21 +35,35 @@ class _LoginPageState extends State<LoginPage> {
 
       LoginHelper.login(email: email, password: password).then((result) async {
         if (result.email == '' && result.password == '') {
-          ScaffoldMessenger.of(context).showSnackBar(
-              const SnackBar(
-                content: Text('Invalid email or password'),
-                backgroundColor: Colors.red,
-                duration: Duration(seconds: 2),
-              )
-            );
+          final snackBar = SnackBar(
+            elevation: 0,
+            backgroundColor: Colors.transparent,
+            content: AwesomeSnackbarContent(
+              title: 'Login Failed',
+              message: 'Please check your email and password!',
+              contentType: ContentType.failure,
+              inMaterialBanner: true,
+            ),
+          );
+
+          ScaffoldMessenger.of(context)
+            ..hideCurrentSnackBar()
+            ..showSnackBar(snackBar);
         } else {
-          ScaffoldMessenger.of(context).showSnackBar(
-              const SnackBar(
-                content: Text('Login Success'),
-                backgroundColor: Colors.blue,
-                duration: Duration(seconds: 2),
-              )
-            );
+          final snackBar = SnackBar(
+            elevation: 0,
+            backgroundColor: Colors.transparent,
+            content: AwesomeSnackbarContent(
+              title: "Login Success",
+              message: "Welcome Back!",
+              contentType: ContentType.success,
+              inMaterialBanner: true,
+            ),
+          );
+
+          ScaffoldMessenger.of(context)
+            ..hideCurrentSnackBar()
+            ..showSnackBar(snackBar);
 
           if (result.role == 'MO') {
             Navigator.push(context, MaterialPageRoute(builder: (context) => const DashboardMOPage()));
@@ -123,22 +141,22 @@ class _LoginPageState extends State<LoginPage> {
                                     const SizedBox(height: 4),
                                     TextFormField(
                                       controller: emailController,
-                                      decoration: const InputDecoration(
+                                      decoration: InputDecoration(
                                         filled: true,
-                                        fillColor: Color(0xFFC3C3B9),
-                                        enabledBorder: OutlineInputBorder(
+                                        fillColor: const Color(0xFFC3C3B9).withOpacity(0.7),
+                                        enabledBorder: const OutlineInputBorder(
                                           borderSide: BorderSide(color: Colors.white, width: 2.0)
                                         ),
-                                        focusedBorder: OutlineInputBorder(
+                                        focusedBorder: const OutlineInputBorder(
                                           borderSide: BorderSide(color: Colors.white, width: 2.0)
                                         ),
                                         hintText: 'Ketik Email Anda Disini ...',
-                                        hintStyle: TextStyle(color: Colors.black),
-                                        contentPadding: EdgeInsets.symmetric(vertical: 15.0, horizontal: 15.0),
-                                        errorStyle: TextStyle(color: Colors.grey)
+                                        hintStyle: const TextStyle(color: Colors.black),
+                                        contentPadding: const EdgeInsets.symmetric(vertical: 15.0, horizontal: 15.0),
+                                        errorStyle: const TextStyle(color: Colors.grey)
                                       ),
-                                      validator:(value) => value == '' ? 'Please enter your email' : null,
-                                      
+                                      style: const TextStyle(color: Colors.black),
+                                      validator: (value) => value == '' ? 'Please enter your email' : null,                                      
                                     ),
                                   ],
                                 ),
@@ -169,7 +187,7 @@ class _LoginPageState extends State<LoginPage> {
                                       controller: passwordController,
                                       decoration: InputDecoration(
                                         filled: true,
-                                        fillColor: const Color(0xFFC3C3B9),
+                                        fillColor: const Color(0xFFC3C3B9).withOpacity(0.7),
                                         enabledBorder: const OutlineInputBorder(
                                           borderSide: BorderSide(color: Colors.white, width: 2.0)
                                         ),
@@ -192,6 +210,7 @@ class _LoginPageState extends State<LoginPage> {
                                         ),
                                         errorStyle: const TextStyle(color: Colors.grey)
                                       ),
+                                      style: const TextStyle(color: Colors.black),
                                       validator:(value) => value == '' ? 'Please enter your password' : null,
                                     ),
                                   ],
