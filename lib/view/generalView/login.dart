@@ -25,7 +25,7 @@ class _LoginPageState extends State<LoginPage> {
     double screenWidth = MediaQuery.of(context).size.width;
     double screenHeight = MediaQuery.of(context).size.height;
 
-    void _loginUser() {
+    void loginUser() {
       final email = emailController.text;
       final password = passwordController.text;
 
@@ -78,6 +78,7 @@ class _LoginPageState extends State<LoginPage> {
                 children: [
                   Stack(
                     children: [
+                      // ignore: sized_box_for_whitespace
                       Container(
                         width: screenWidth,
                         height: 0.65 * screenHeight
@@ -168,7 +169,7 @@ class _LoginPageState extends State<LoginPage> {
                                       controller: passwordController,
                                       decoration: InputDecoration(
                                         filled: true,
-                                        fillColor: Color(0xFFC3C3B9),
+                                        fillColor: const Color(0xFFC3C3B9),
                                         enabledBorder: const OutlineInputBorder(
                                           borderSide: BorderSide(color: Colors.white, width: 2.0)
                                         ),
@@ -176,8 +177,8 @@ class _LoginPageState extends State<LoginPage> {
                                           borderSide: BorderSide(color: Colors.white, width: 2.0)
                                         ),
                                         hintText: 'Ketik Password Anda Disini ...',
-                                        hintStyle: TextStyle(color: Colors.black),
-                                        contentPadding: EdgeInsets.symmetric(vertical: 15.0, horizontal: 15.0),
+                                        hintStyle: const TextStyle(color: Colors.black),
+                                        contentPadding: const EdgeInsets.symmetric(vertical: 15.0, horizontal: 15.0),
                                         suffixIcon: GestureDetector(
                                           onTap:() {
                                             setState(() {
@@ -201,7 +202,7 @@ class _LoginPageState extends State<LoginPage> {
                               GestureDetector(
                                 onTap: () {
                                   if (_formKey.currentState!.validate()) {
-                                    _loginUser();
+                                    loginUser();
                                   }
                                 },
                                 child: Container(

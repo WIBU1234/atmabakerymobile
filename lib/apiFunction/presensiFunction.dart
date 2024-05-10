@@ -1,3 +1,5 @@
+// ignore_for_file: file_names, non_constant_identifier_names
+
 import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'package:atmabakerymobile/apiFunction/loginFunction.dart';
@@ -10,7 +12,7 @@ class PresensiHelper {
   static const endpoint = GlobalURL.endpoint;
 
   static Future<Presensi> presensi({required int? ID_Pegawai, required String? Keterangan}) async {
-    String apiURL = 'http://'+url+endpoint+'/presensi';
+    String apiURL = 'http://$url$endpoint/presensi';
     String token = await LoginHelper().getToken();
     try {
       var apiResult = await client.post(
@@ -42,7 +44,7 @@ class PresensiHelper {
   }
 
   static Future<List<Presensi>> show() async {
-    String apiURL = 'http://'+url+endpoint+'/presensi';
+    String apiURL = 'http://$url$endpoint/presensi';
     String token = await LoginHelper().getToken();
     try {
       var apiResult = await client.get(
@@ -51,11 +53,6 @@ class PresensiHelper {
           "Content-Type": "application/json",
           "Authorization": "Bearer $token"},
       );
-
-      print('URL : ${apiURL}');
-      print('status code : ${apiResult.statusCode}');
-      print('reason : ${apiResult.reasonPhrase}');
-      print('body : ${apiResult.body}');
 
       if(apiResult.statusCode == 200) {
         Iterable list = json.decode(apiResult.body)['data'];

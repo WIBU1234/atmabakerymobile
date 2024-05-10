@@ -1,3 +1,5 @@
+// ignore_for_file: file_names
+
 import 'package:atmabakerymobile/apiFunction/loginFunction.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -20,7 +22,7 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
     double screenWidth = MediaQuery.of(context).size.width;
     double screenHeight = MediaQuery.of(context).size.height;
 
-  void _forgotPassword(){
+  void forgotPassword(){
     final email = emailController.text;
 
     LoginHelper.sendEmail(email: email).then((result) async {
@@ -67,6 +69,7 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
                 children: [
                   Stack(
                     children: [
+                      // ignore: sized_box_for_whitespace
                       Container(
                         width: screenWidth,
                         height: 0.65 * screenHeight,
@@ -139,7 +142,7 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
                               GestureDetector(
                                 onTap: () {
                                   if (_formKey.currentState!.validate()) {
-                                    _forgotPassword();
+                                    forgotPassword();
                                   }
                                 },
                                 child: Container(

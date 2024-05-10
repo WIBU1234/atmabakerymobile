@@ -1,3 +1,5 @@
+// ignore_for_file: file_names
+
 import 'package:atmabakerymobile/entity/customerModel.dart';
 import 'package:atmabakerymobile/apiFunction/customerFunction.dart';
 import 'package:atmabakerymobile/view/generalView/login.dart';
@@ -21,6 +23,7 @@ class _ShowProfileState extends State<ShowProfile> {
     });
   }
 
+  @override
   void initState() {
     super.initState();
     loadData();
@@ -47,9 +50,9 @@ class _ShowProfileState extends State<ShowProfile> {
                           width: 200,
                           height: 200,
                           padding: const EdgeInsets.only(top: 20),
-                          child: CircleAvatar(
+                          child: const CircleAvatar(
                             backgroundColor: Colors.transparent,
-                            backgroundImage: const AssetImage('assets/images/profile.png'),
+                            backgroundImage: AssetImage('assets/images/profile.png'),
                             radius: 100,
                           ),
                         ),

@@ -1,3 +1,5 @@
+// ignore_for_file: file_names, camel_case_types
+
 class OnBoarding_Info {
   String title;
   String desc1;

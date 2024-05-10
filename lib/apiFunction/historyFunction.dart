@@ -1,3 +1,5 @@
+// ignore_for_file: file_names, non_constant_identifier_names
+
 import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'package:atmabakerymobile/apiFunction/loginFunction.dart';
@@ -10,7 +12,7 @@ class HistoryHelper {
   static const endpoint = GlobalURL.endpoint;
 
   static Future<List<History>> show() async {
-    String apiURL = 'http://'+url+endpoint+'/customer/history';
+    String apiURL = 'http://$url$endpoint/customer/history';
     String token = await LoginHelper().getToken();
     try {
       var apiResult = await client.get(
@@ -19,11 +21,6 @@ class HistoryHelper {
           "Content-Type": "application/json",
           "Authorization": "Bearer $token"},
       );
-
-      print('URL : ${apiURL}');
-      print('status code : ${apiResult.statusCode}');
-      print('reason : ${apiResult.reasonPhrase}');
-      print('body : ${apiResult.body}');
 
       if(apiResult.statusCode == 200) {
         Iterable list = json.decode(apiResult.body)['data'];
@@ -37,7 +34,7 @@ class HistoryHelper {
   }
 
   static Future<List<History>> search({required String? Nama_produk}) async {
-    String apiURL = 'http://'+url+endpoint+'/customer/history/$Nama_produk';
+    String apiURL = 'http://$url$endpoint/customer/history/$Nama_produk';
     String token = await LoginHelper().getToken();
 
     try {
@@ -47,11 +44,6 @@ class HistoryHelper {
           "Content-Type": "application/json",
           "Authorization": "Bearer $token"},
       );
-
-      print('URL : ${apiURL}');
-      print('status code : ${apiResult.statusCode}');
-      print('reason : ${apiResult.reasonPhrase}');
-      print('body : ${apiResult.body}');
 
       if(apiResult.statusCode == 200) {
         Iterable list = json.decode(apiResult.body)['data'];

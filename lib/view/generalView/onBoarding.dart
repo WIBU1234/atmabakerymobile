@@ -1,3 +1,5 @@
+// ignore_for_file: file_names
+
 import 'package:flutter/material.dart';
 import 'package:atmabakerymobile/anotherComponent/onboardingComponent/OnBoardingList.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
@@ -39,6 +41,7 @@ class _OnBoardingState extends State<OnBoarding> {
         ),
       ),
 
+      // ignore: avoid_unnecessary_containers
       body: Container(
         child: PageView.builder(
           itemCount: controller.items.length,
