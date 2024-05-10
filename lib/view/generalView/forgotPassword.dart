@@ -40,6 +40,7 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
             duration: Duration(seconds: 2),
           )
         );
+        Navigator.pop(context);
       }
     });
   }
