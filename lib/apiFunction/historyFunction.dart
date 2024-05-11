@@ -22,7 +22,7 @@ class HistoryHelper {
           "Authorization": "Bearer $token"},
       );
 
-      if(apiResult.statusCode == 200) {
+      if(apiResult.body.isNotEmpty) {
         Iterable list = json.decode(apiResult.body)['data'];
         return list.map((e) => History.fromJson(e)).toList();
       } else {

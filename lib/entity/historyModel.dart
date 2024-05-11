@@ -4,7 +4,8 @@ import 'dart:convert';
 
 class History {
   String? ID_Transaksi, Nama_Produk, Nama_Alamat, Status, Tanggal_Transaksi, Tanggal_Pelunasan, Tanggal_Ambil;
-  int? ID_Customer, ID_Pegawai, Total_Transaksi, Total_pembayaran;
+  int? ID_Customer, ID_Pegawai, Total_pembayaran;
+  double? Total_Transaksi;
   
   History({
     this.ID_Transaksi,
@@ -23,12 +24,12 @@ class History {
 
   factory History.fromRawJson(String str) => History.fromJson(json.decode(str));
   factory History.fromJson(Map<String, dynamic> json) => History (
-    ID_Transaksi: json['ID_Transaksi'],
-    Nama_Produk: json['Nama_Produk'],
-    Status: json['Status'],
-    Tanggal_Transaksi: json['Tanggal_Transaksi'],
-    Tanggal_Ambil: json['Tanggal_Ambil'],
-    Total_Transaksi: json['Total_Transaksi'],
+    ID_Transaksi: json['ID_Transaksi'] ?? '',
+    Nama_Produk: json['Nama_Produk'] ?? '',
+    Status: json['Status'] ?? '',
+    Tanggal_Transaksi: json['Tanggal_Transaksi'] ?? '',
+    Tanggal_Ambil: json['Tanggal_Ambil'] ?? '',
+    Total_Transaksi: json['Total_Transaksi']?.toDouble() ?? 0.0,
   );
 
   String toRawJson() => json.encode(toJson());

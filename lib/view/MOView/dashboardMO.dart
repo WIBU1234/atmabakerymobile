@@ -6,7 +6,9 @@ import 'package:atmabakerymobile/view/MOView/MOPresensi/insertPresensi.dart';
 import 'package:atmabakerymobile/view/MOView/MOPresensi/showPresensi.dart';
 
 class DashboardMOPage extends StatefulWidget {
-  const DashboardMOPage({super.key});
+  const DashboardMOPage({super.key, this.id});
+  final int? id;
+
 
   @override
   State<DashboardMOPage> createState() => _DashboardMOPageState();
@@ -14,6 +16,12 @@ class DashboardMOPage extends StatefulWidget {
 
 class _DashboardMOPageState extends State<DashboardMOPage> {
   int _selectedIndex = 0;
+
+  @override
+  void initState() {
+    super.initState();
+    _selectedIndex = widget.id ?? 0;
+  }
 
   @override
   Widget build(BuildContext context) {

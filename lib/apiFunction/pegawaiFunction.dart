@@ -34,4 +34,26 @@ class PegawaiHelper {
       throw Exception(e.toString());
     }
   }
+
+  static Future<List<Pegawai>> find({required int? id}) async {
+    String apiURL = 'http://$url$endpoint/pegawai/$id';
+    String token = await LoginHelper().getToken();
+    
+      var apiResult = await client.get(
+        Uri.parse(apiURL),
+        headers: {
+          "Content-Type": "application/json",
+          "Authorization": "Bearer $token"
+        }
+      );
+
+      if(apiResult.statusCode == 200) {
+        List<dynamic> responseData = json.decode(apiResult.body)['data'];
+        List<Pegawai> pegawaiList = responseData.map((item) => Pegawai.fromJson(item)).toList();
+        return pegawaiList;
+      } else {
+        return <Pegawai>[];
+      }
+
+  }
 }

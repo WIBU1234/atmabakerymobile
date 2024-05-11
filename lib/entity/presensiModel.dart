@@ -36,19 +36,6 @@ class Presensi {
     Nama_Pegawai: json['Nama_Pegawai'],
   );
 
-  // factory Presensi.fromJson(Map<String, dynamic> json) {
-  //   var list = json['pegawai'] as List;
-  //   List<Pegawai> pegawaiList = list.map((i) => Pegawai.fromJson(i)).toList();
-
-  //   return Presensi (
-  //     ID_Presensi: json['ID_Presensi'],
-  //     ID_Pegawai: json['ID_Pegawai'],
-  //     Keterangan: json['Keterangan'],
-  //     Tanggal: (json['Tanggal']).toString(),
-  //     pegawai: pegawaiList,
-  //   );
-  // }
-
   String toRawJson() => json.encode(toJson());
   Map<String, dynamic> toJson() => {
     'ID_Presensi': ID_Presensi,

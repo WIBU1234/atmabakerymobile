@@ -65,4 +65,59 @@ class PresensiHelper {
       throw Exception(e.toString());
     }
   }
+
+  static Future<Presensi> showById({required int? ID}) async {
+    String apiURL = 'http://$url$endpoint/presensi/$ID';
+    String token = await LoginHelper().getToken();
+    try {
+      var apiResult = await client.get(
+        Uri.parse(apiURL),
+        headers: {
+          "Content-Type": "application/json",
+          "Authorization": "Bearer $token"},
+      );
+
+      print('URL : ${apiURL}');
+      print('status code : ${apiResult.statusCode}');
+      print('reason : ${apiResult.reasonPhrase}');
+      print('body : ${apiResult.body}');
+
+      if(apiResult.statusCode == 200) {
+        return Presensi.fromJson(
+          json.decode(apiResult.body)['data']
+        );
+      } else {
+        return Presensi.empty();
+      }
+    } catch(e) {
+      throw Exception(e.toString());
+    }
+  }
+
+  static Future<Presensi> update ({required int? ID, required int? ID_Pegawai, required String? Keterangan}) async {
+    String apiURL = 'http://$url$endpoint/presensi/$ID';
+    String token = await LoginHelper().getToken();
+    try {
+      var apiResult = await client.put(
+        Uri.parse(apiURL),
+        headers: {
+          "Content-Type": "application/json",
+          "Authorization": "Bearer $token"},
+        body: jsonEncode({
+          'ID_Pegawai': ID_Pegawai,
+          'Keterangan': Keterangan,
+        })
+      );
+
+      if(apiResult.statusCode == 200) {
+        return Presensi.fromJson(
+          json.decode(apiResult.body)
+        );
+      } else {
+        return Presensi.empty();
+      }
+    } catch(e) {
+      throw Exception(e.toString());
+    }
+  }
 }
