@@ -1,11 +1,11 @@
 // View Import
 
 // Material Import
-// import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart' hide BoxDecoration, BoxShadow;
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter_inset_box_shadow/flutter_inset_box_shadow.dart';
-
+import 'package:google_fonts/google_fonts.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class CustomerHomePage extends StatefulWidget {
   const CustomerHomePage({super.key});
@@ -31,11 +31,10 @@ class _CustomerHomePageState extends State<CustomerHomePage> {
           child: Stack(
             children: <Widget>[
               Column(
-                children: <Widget>[
-                  
+                children: <Widget>[                  
                   Container(
                     width: screenWidth,
-                    height: screenHeight * 0.4,
+                    height: screenHeight * 0.36,
                     decoration: const BoxDecoration(
                       gradient: LinearGradient(
                         begin: Alignment.topCenter,
@@ -64,7 +63,7 @@ class _CustomerHomePageState extends State<CustomerHomePage> {
               ),
 
               Align(
-                alignment: const Alignment(0, -0.18),
+                alignment: const Alignment(0, -0.28),
                 child: Container(
                   width: screenWidth * 0.8,
                   height: screenHeight * 0.18,
@@ -77,7 +76,7 @@ class _CustomerHomePageState extends State<CustomerHomePage> {
               ),
 
               Align(
-                alignment: const Alignment(0, 0.2),
+                alignment: const Alignment(0, 0.1),
                 child: Container(
                   width: screenWidth * 0.8,
                   height: screenHeight * 0.1,
@@ -87,7 +86,7 @@ class _CustomerHomePageState extends State<CustomerHomePage> {
                   ),
 
                   child: Align(
-                    alignment: const Alignment(0, 0.22),
+                    alignment: const Alignment(0, 0.12),
                     child: Container(
                       width: screenWidth * 0.8,
                       height: screenHeight * 0.08,
@@ -98,13 +97,13 @@ class _CustomerHomePageState extends State<CustomerHomePage> {
                       
                       child: ListView.builder(
                         scrollDirection: Axis.horizontal,
-                        itemCount: 3,
+                        itemCount: 8,
                         itemBuilder: (context, index) {
                         
                           return Padding(
                             padding: const EdgeInsets.only(left: 12),
                             child: Container(
-                              width: screenWidth * 0.3,
+                              width: screenWidth * 0.26,
                               height: screenHeight * 0.08,
                               decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(10),
@@ -149,17 +148,173 @@ class _CustomerHomePageState extends State<CustomerHomePage> {
               ),
 
               Align(
-                alignment: const Alignment(0, 0.9),
+                alignment: const Alignment(0, 0.94),
                 child: Container(
                   width: screenWidth * 0.8,
-                  height: screenHeight * 0.28,
+                  height: screenHeight * 0.36,
+                  // color: const Color(0xFF222222),
+                  
+                  child: Align(
+                    alignment: Alignment.topCenter,
+                    child: Padding(
+                      padding: const EdgeInsets.all(0),
+                      child: GridView.builder(
+                        itemCount: 10,
+                        gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                          crossAxisCount: 2,
+                          childAspectRatio: 0.64,
+                        ),
 
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(10.0),
-                    color: const Color(0xFF000000),
+                        itemBuilder: (context, index) {
+                          return Padding(
+                            padding: const EdgeInsets.all(4.0),
+                            child: Container(
+                              height: screenHeight * 0.294,
+                              width: screenWidth * 0.36,
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(4.0),
+                                color: const Color(0xFFFFFFFF),
+                                border: Border.all(
+                                  color: const Color(0xFFD9D9D9),
+                                  width: 1.4,
+                                ),
+                              ),
+                              child: Padding(
+                                padding: const EdgeInsets.all(8.0),
+                                child: Column(
+                                  children: <Widget>[
+                                      Container(
+                                      width: screenWidth,
+                                      height: screenHeight * 0.1,
+                                      
+                                      decoration: BoxDecoration(
+                                        borderRadius: BorderRadius.circular(4.0),
+                                        color: Colors.black,
+                                      ),
+                                    ),
+                            
+                                    SizedBox(height: screenHeight * 0.006),
+                                    Container(
+                                      width: screenWidth,
+                                      height: screenHeight * 0.038,
+                                      // color: Colors.black,
+                            
+                                      child: Align(
+                                        alignment: Alignment.centerLeft,
+                                        child: FittedBox(
+                                          fit: BoxFit.contain,
+                                          child: AutoSizeText(
+                                            "Lapis Legit",
+                                            style: GoogleFonts.poppins(
+                                              textStyle: const TextStyle(
+                                                fontSize: 20.0,
+                                                color: Color(0xFF000000),
+                                                fontWeight: FontWeight.w500,
+                                              ),
+                                            ),
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                            
+                                    SizedBox(height: screenHeight * 0.002),
+                                    Container(
+                                      width: screenWidth,
+                                      height: screenHeight * 0.028,
+                                      // color: Colors.black,
+                            
+                                      child: Align(
+                                        alignment: Alignment.centerLeft,
+                                        child: FittedBox(
+                                          fit: BoxFit.contain,
+                                          child: AutoSizeText(
+                                            "Cake",
+                                            style: GoogleFonts.poppins(
+                                              textStyle: const TextStyle(
+                                                fontSize: 20.0,
+                                                color: Color(0xFF6E6E6E),
+                                              ),
+                                            ),
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                            
+                                    SizedBox(height: screenHeight * 0.006),
+                                    Container(
+                                      width: screenWidth,
+                                      height: screenHeight * 0.044,
+                                      // color: Colors.black,
+                            
+                                      child: Align(
+                                        alignment: Alignment.centerLeft,
+                                        child: FittedBox(
+                                          fit: BoxFit.contain,
+                                          child: AutoSizeText(
+                                            "Rp. 10.000",
+                                            style: GoogleFonts.poppins(
+                                              textStyle: const TextStyle(
+                                                fontSize: 20.0,
+                                                color: Color(0xFF000000),
+                                                fontWeight: FontWeight.w500,
+                                              ),
+                                            ),
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                            
+                                    SizedBox(height: screenHeight * 0.006),
+                                    Expanded(
+                                      child: Container(
+                                        decoration: BoxDecoration(
+                                          borderRadius: BorderRadius.circular(4.0),
+                                          color: const Color(0xFF947257),
+                                        ),
+                            
+                                        child: Padding(
+                                          padding: const EdgeInsets.all(8.0),
+                                          child: Center(
+                                            child: Row(
+                                              mainAxisAlignment: MainAxisAlignment.spaceAround,
+                                              children: [
+                                                const Icon(
+                                                  FontAwesomeIcons.cartShopping,
+                                                  color: Colors.white,
+                                                  size: 14.0
+                                                ),
+                                            
+                                                FittedBox(
+                                                  fit: BoxFit.contain,
+                                                  child: AutoSizeText(
+                                                    "Add To Cart",
+                                                    style: GoogleFonts.poppins(
+                                                      textStyle: const TextStyle(
+                                                        fontSize: 12.0,
+                                                        color: Color(0xFFFFFFFF),
+                                                        fontWeight: FontWeight.w500,
+                                                      ),
+                                                    ),
+                                                  ),
+                                                ),
+                                              ],
+                                            ),
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ),
+                          );
+                        },
+                      ),
+                    ),
                   ),
                 ),
               ),
+
             ],
           ),
         ),
@@ -168,33 +323,145 @@ class _CustomerHomePageState extends State<CustomerHomePage> {
   }
 }
 
-// Positioned(
-//   top: screenHeight * 0.335,
-//   left: screenWidth * 0.05,
-//   child: Container(
-//     width: 100.0,
-//     height: 100.0,
-//     color: const Color(0xFF947257),
-//   ),
-// ),
+// Container(
+//   height: screenHeight * 0.294,
+//   width: screenWidth * 0.36,
+//   decoration: BoxDecoration(
+//     borderRadius: BorderRadius.circular(4.0),
+//     color: const Color(0xFFFFFFFF),
 
-// child: Padding(
-//   padding: const EdgeInsets.only(left: 4),
-//   child: Container(
-//     width: screenWidth * 0.3,
-//     height: screenHeight * 0.08,                      
-//     decoration: BoxDecoration(
-//       borderRadius: BorderRadius.circular(10.0),
-//       color: const Color(0xFF000000),
+//     border: Border.all(
+//       color: const Color(0xFFD9D9D9),
+//       width: 1.4,
 //     ),
-//     child: const Center(
-//       child: Text(
-//         "Categories",
-//         style: TextStyle(
-//           fontSize: 20.0,
-//           color: Color(0xFFFFFFFF),
+//   ),
+
+//   child: Padding(
+//     padding: const EdgeInsets.all(8.0),
+//     child: Column(
+//       children: <Widget>[
+//         Container(
+//           width: screenWidth,
+//           height: screenHeight * 0.1,
+
+//           decoration: BoxDecoration(
+//             borderRadius: BorderRadius.circular(4.0),
+//             color: Colors.black,
+//           ),
 //         ),
-//       ),
+
+//         SizedBox(height: screenHeight * 0.006),
+//         Container(
+//           width: screenWidth,
+//           height: screenHeight * 0.038,
+//           // color: Colors.black,
+
+//           child: Align(
+//             alignment: Alignment.centerLeft,
+//             child: FittedBox(
+//               fit: BoxFit.contain,
+//               child: AutoSizeText(
+//                 "Lapis Legit",
+//                 style: GoogleFonts.poppins(
+//                   textStyle: const TextStyle(
+//                     fontSize: 20.0,
+//                     color: Color(0xFF000000),
+//                     fontWeight: FontWeight.w500,
+//                   ),
+//                 ),
+//               ),
+//             ),
+//           ),
+//         ),
+
+//         SizedBox(height: screenHeight * 0.002),
+//         Container(
+//           width: screenWidth,
+//           height: screenHeight * 0.028,
+//           // color: Colors.black,
+
+//           child: Align(
+//             alignment: Alignment.centerLeft,
+//             child: FittedBox(
+//               fit: BoxFit.contain,
+//               child: AutoSizeText(
+//                 "Cake",
+//                 style: GoogleFonts.poppins(
+//                   textStyle: const TextStyle(
+//                     fontSize: 20.0,
+//                     color: Color(0xFF6E6E6E),
+//                   ),
+//                 ),
+//               ),
+//             ),
+//           ),
+//         ),
+
+//         SizedBox(height: screenHeight * 0.006),
+//         Container(
+//           width: screenWidth,
+//           height: screenHeight * 0.044,
+//           // color: Colors.black,
+
+//           child: Align(
+//             alignment: Alignment.centerLeft,
+//             child: FittedBox(
+//               fit: BoxFit.contain,
+//               child: AutoSizeText(
+//                 "Rp. 10.000",
+//                 style: GoogleFonts.poppins(
+//                   textStyle: const TextStyle(
+//                     fontSize: 20.0,
+//                     color: Color(0xFF000000),
+//                     fontWeight: FontWeight.w500,
+//                   ),
+//                 ),
+//               ),
+//             ),
+//           ),
+//         ),
+
+//         SizedBox(height: screenHeight * 0.006),
+//         Expanded(
+//           child: Container(
+//             decoration: BoxDecoration(
+//               borderRadius: BorderRadius.circular(4.0),
+//               color: const Color(0xFF947257),
+//             ),
+
+//             child: Padding(
+//               padding: const EdgeInsets.all(8.0),
+//               child: Center(
+//                 child: Row(
+//                   mainAxisAlignment: MainAxisAlignment.spaceAround,
+//                   children: [
+//                     const Icon(
+//                       FontAwesomeIcons.cartShopping,
+//                       color: Colors.white,
+//                       size: 14.0
+//                     ),
+
+//                     FittedBox(
+//                       fit: BoxFit.contain,
+//                       child: AutoSizeText(
+//                         "Add To Cart",
+//                         style: GoogleFonts.poppins(
+//                           textStyle: const TextStyle(
+//                             fontSize: 12.0,
+//                             color: Color(0xFFFFFFFF),
+//                             fontWeight: FontWeight.w500,
+//                           ),
+//                         ),
+//                       ),
+//                     ),
+//                   ],
+//                 ),
+//               ),
+//             ),
+//           ),
+//         ),
+
+//       ],
 //     ),
 //   ),
 // ),
