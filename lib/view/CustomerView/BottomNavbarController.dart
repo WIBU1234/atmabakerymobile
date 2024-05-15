@@ -1,14 +1,17 @@
 // ignore_for_file: file_names
 
+// Import Material
 import "package:flutter/cupertino.dart";
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import "package:flutter/material.dart";
 import "package:persistent_bottom_nav_bar/persistent_tab_view.dart";
 
+// Import View
 import "package:atmabakerymobile/view/generalView/onBoarding.dart";
+import "package:atmabakerymobile/view/CustomerView/CustomerHomepage/CustomerHome.dart";
 
-class HomePageParent extends StatelessWidget {
-  const HomePageParent({super.key});
+class NavBarController extends StatelessWidget {
+  const NavBarController({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -17,8 +20,8 @@ class HomePageParent extends StatelessWidget {
 
     List<Widget> buildScreens() {
         return [
-          const OnBoarding(),
-          const OnBoarding(),
+          const CustomerHomePage(),
+          const CustomerHomePage(),
           const OnBoarding(),
           const OnBoarding(),
         ];
@@ -84,7 +87,7 @@ class HomePageParent extends StatelessWidget {
           curve: Curves.ease,
           duration: Duration(milliseconds: 200),
         ),
-        navBarStyle: NavBarStyle.style9,
+        navBarStyle: NavBarStyle.style3,
     );
   }
 }

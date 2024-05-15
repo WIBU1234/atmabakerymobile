@@ -3,7 +3,7 @@ import 'package:atmabakerymobile/apiFunction/loginFunction.dart';
 // import 'package:atmabakerymobile/view/CustomerView/dashboardCustomer.dart';
 import 'package:atmabakerymobile/view/MOView/dashboardMO.dart';
 import 'package:atmabakerymobile/view/generalView/forgotPassword.dart';
-import 'package:atmabakerymobile/view/CustomerView/Homepage.dart';
+import 'package:atmabakerymobile/view/CustomerView/BottomNavbarController.dart';
 
 // Material Import
 import 'package:flutter/material.dart';
@@ -57,7 +57,7 @@ class _LoginPageState extends State<LoginPage> {
             Navigator.push(context, MaterialPageRoute(builder: (context) => const DashboardMOPage()));
           } else {
             // Navigator.push(context, MaterialPageRoute(builder: (context) => const DashboardCustomerPage()));
-            Navigator.push(context, MaterialPageRoute(builder: (context) => const HomePageParent()));
+            Navigator.push(context, MaterialPageRoute(builder: (context) => const NavBarController()));
           }
         }
       });

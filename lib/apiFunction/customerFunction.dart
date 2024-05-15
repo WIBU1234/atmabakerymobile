@@ -8,11 +8,12 @@ import 'package:atmabakerymobile/apiFunction/globalUrl.dart';
 
 class CustomerHelper {
   static http.Client client = http.Client();
+  static const String protokol = GlobalURL.protokol;
   static const String url = GlobalURL.url;
   static const endpoint = GlobalURL.endpoint;
 
   static Future<Customer> showProfile() async {
-    String apiURL = 'http://$url$endpoint/customer';
+    String apiURL = '$protokol$url$endpoint/customer';
     String token = await LoginHelper().getToken();
     try {
       var apiResult = await client.get(

@@ -4,13 +4,14 @@ import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:atmabakerymobile/entity/loginModel.dart';
-import 'package:atmabakerymobile/apiFunction/GlobalURL.dart';
+import 'package:atmabakerymobile/apiFunction/globalUrl.dart';
 
 class LoginHelper{
   
   static http.Client client = http.Client();
+  static const String protokol = GlobalURL.protokol;
   static const String url = GlobalURL.url;
-  static const endpoint = GlobalURL.endpoint;
+  static const String endpoint = GlobalURL.endpoint;
   
   Future<bool> setToken(String value) async {
     final SharedPreferences prefs = await SharedPreferences.getInstance();
@@ -24,7 +25,7 @@ class LoginHelper{
 
 
   static Future<LoginModel> login({required String email, required String password}) async {
-    String apiURL = 'http://$url$endpoint/login';
+    String apiURL = '$protokol$url$endpoint/login';
     String? token;
     try{
       var apiResult = await client.post(
