@@ -11,6 +11,8 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 import 'package:atmabakerymobile/entity/kategoriModel.dart';
+import 'package:atmabakerymobile/entity/productModel.dart';
+import 'package:atmabakerymobile/apiFunction/productFunction.dart';
 import 'package:atmabakerymobile/apiFunction/kategoriFunction.dart';
 
 class CustomerHomePage extends StatefulWidget {
@@ -22,11 +24,29 @@ class CustomerHomePage extends StatefulWidget {
 
 class _CustomerHomePageState extends State<CustomerHomePage> {
   int selectedIndex = -1;
-  late List<KategoriModel> kategoriList;
+  List<KategoriModel>? kategoriList;
+  List<Product>? productList;
+
+  final TextEditingController searchController = TextEditingController();
 
   @override
   void initState() {
+    fetchData();
     super.initState();
+  }
+
+  void fetchData(){
+    KategoriHelper().getKategori().then((value) {
+      setState(() {
+        kategoriList = value;
+      });
+    });
+
+    ProductHelper().getAllShow().then((value) {
+      setState(() {
+        productList = value;
+      });
+    });
   }
 
   @override
@@ -108,113 +128,66 @@ class _CustomerHomePageState extends State<CustomerHomePage> {
                         // color: const Color(0xFF000000),
                       ),
                       
-                      // child: ListView.builder(
-                      //   scrollDirection: Axis.horizontal,
-                      //   itemCount: 8,
-                      //   itemBuilder: (context, index) {
-                        
-                      //     return Padding(
-                      //       padding: const EdgeInsets.only(left: 12),
-
-                      //       child: Container(
-                      //         width: screenWidth * 0.26,
-                      //         height: screenHeight * 0.08,
-                      //         decoration: BoxDecoration(
-                      //           borderRadius: BorderRadius.circular(10),
-                      //           color: Colors.black,
-                      //           boxShadow: const [
-                      //             BoxShadow(
-                      //               offset: Offset(-100, -100),
-                      //               blurRadius: 10,
-                      //               // color: Colors.white,
-                      //               color: Color(0xFF947257),
-                      //               inset: true,
-                      //             ),
-                      //             BoxShadow(
-                      //               offset: Offset(10, 10),
-                      //               blurRadius: 10,
-                      //               // color: Color(0xFFBEBEBE),
-                      //               color: Color(0xFF745944),
-                      //               inset: true,
-                      //             ),
-                      //           ],
-                      //         ),
-                      //         child: Padding(
-                      //           padding: EdgeInsets.all(10.0),
-                      //           child: FittedBox(
-                      //             fit: BoxFit.contain,
-                      //             child: AutoSizeText(
-                      //               // "Categories",
-                      //               index.toString(),
-                      //               style: TextStyle(
-                      //                 fontSize: 20.0,
-                      //                 // color: Color(0xFF000000),
-                      //                 color: Color(0xFFFFFFFF),
-                      //               ),
-                      //               maxLines: 1,
-                      //             ),
-                      //           ),
-                      //         ),
-                      //       ),
-
-                      //     );
-                      //   },
-                      // ),
-
-                        child: ListView.builder(
-                          scrollDirection: Axis.horizontal,
-                          itemCount: 8,
-                          itemBuilder: (context, index) {
-                            return GestureDetector(
-                              onTap: () {
-                                setState(() {
+                      child: (kategoriList != null) ? ListView.builder(
+                        scrollDirection: Axis.horizontal,
+                        itemCount: kategoriList!.length,
+                        itemBuilder: (context, index) {
+                          return GestureDetector(
+                            onTap: () {
+                              setState(() {
+                                if(selectedIndex == index) {
+                                  selectedIndex = -1;
+                                } else {
                                   selectedIndex = index;
-                                });
-                              },
-                              child: Padding(
-                                padding: const EdgeInsets.only(left: 12),
-                                child: Container(
-                                  width: screenWidth * 0.26,
-                                  height: screenHeight * 0.08,
-                                  decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(10),
-                                    color: selectedIndex == index ? const Color(0xFF947257) : Colors.white,
-                                    boxShadow: [
-                                      BoxShadow(
-                                        offset: const Offset(-100, -100),
-                                        blurRadius: 10,
-                                        color: selectedIndex == index ? const Color(0xFF947257) : Colors.white,
-                                        inset: true,
+                                }
+                              });
+                            },
+                            child: Padding(
+                              padding: const EdgeInsets.only(left: 12),
+                              child: Container(
+                                width: screenWidth * 0.26,
+                                height: screenHeight * 0.08,
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(10),
+                                  color: selectedIndex == index ? const Color(0xFF947257) : Colors.white,
+                                  boxShadow: [
+                                    BoxShadow(
+                                      offset: const Offset(-100, -100),
+                                      blurRadius: 10,
+                                      color: selectedIndex == index ? const Color(0xFF947257) : Colors.white,
+                                      inset: true,
+                                    ),
+                                    BoxShadow(
+                                      offset: const Offset(10, 10),
+                                      blurRadius: 10,
+                                      color: selectedIndex == index ? const Color(0xFF745944) : const Color(0xFFBEBEBE),
+                                      inset: true,
+                                    ),
+                                  ],
+                                ),
+                                child: Padding(
+                                  padding: const EdgeInsets.all(10.0),
+                                  child: FittedBox(
+                                    fit: BoxFit.contain,
+                                    child: AutoSizeText(
+                                      // kategoriList.length > 0 ? kategoriList[index].namaKategori : "Categories",
+                                      // kategoriList!.length.toString(),
+                                      (kategoriList != null && kategoriList!.isNotEmpty) ? kategoriList![index].Nama_Kategori : "Categories",
+                                      style: TextStyle(
+                                        fontSize: 20.0,
+                                        color: selectedIndex == index ? const Color(0xFFFFFFFF) : const Color(0xFF000000),
                                       ),
-                                      BoxShadow(
-                                        offset: const Offset(10, 10),
-                                        blurRadius: 10,
-                                        color: selectedIndex == index ? const Color(0xFF745944) : const Color(0xFFBEBEBE),
-                                        inset: true,
-                                      ),
-                                    ],
-                                  ),
-                                  child: Padding(
-                                    padding: const EdgeInsets.all(10.0),
-                                    child: FittedBox(
-                                      fit: BoxFit.contain,
-                                      child: AutoSizeText(
-                                        "Categories",
-                                        style: TextStyle(
-                                          fontSize: 20.0,
-                                          color: selectedIndex == index ? const Color(0xFFFFFFFF) : const Color(0xFF000000),
-                                        ),
-                                        maxLines: 1,
-                                      ),
+                                      maxLines: 1,
                                     ),
                                   ),
                                 ),
                               ),
-                            );
-                          },
-                        ),
-
-
+                            ),
+                          );
+                        },
+                      ) : const Center(
+                        child: CircularProgressIndicator(),
+                      ),
                     ),
                   ),
                 ),
@@ -358,9 +331,21 @@ class _CustomerHomePageState extends State<CustomerHomePage> {
                                     ),
                               
                                     SizedBox(width: screenWidth * 0.02),
-                                    const Expanded(
+                                    Expanded(
+                                      // child: TextField(
+                                      //   decoration: InputDecoration(
+                                      //     hintText: "Search product ...",
+                                      //     hintStyle: TextStyle(
+                                      //       color: Color(0xFFABABAB),
+                                      //       fontSize: 16.0,
+                                      //     ),
+                                      //     border: InputBorder.none,
+                                      //   ),
+                                      // ),
+
                                       child: TextField(
-                                        decoration: InputDecoration(
+                                        controller: searchController,
+                                        decoration: const InputDecoration(
                                           hintText: "Search product ...",
                                           hintStyle: TextStyle(
                                             color: Color(0xFFABABAB),
@@ -368,7 +353,15 @@ class _CustomerHomePageState extends State<CustomerHomePage> {
                                           ),
                                           border: InputBorder.none,
                                         ),
+                                        style: const TextStyle(
+                                          color: Color(0xFFABABAB),
+                                          fontSize: 16.0,
+                                        ),
+                                        onChanged: (value) {
+
+                                        },
                                       ),
+
                                     ),
                                   ],
                                 ),
@@ -429,8 +422,8 @@ class _CustomerHomePageState extends State<CustomerHomePage> {
                     child: Padding(
                       padding: const EdgeInsets.all(0),
 
-                      child: GridView.builder(
-                        itemCount: 10,
+                      child: (productList != null) ? GridView.builder(
+                        itemCount: productList!.length,
                         gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                           crossAxisCount: 2,
                           childAspectRatio: 0.64,
@@ -475,7 +468,8 @@ class _CustomerHomePageState extends State<CustomerHomePage> {
                                         child: FittedBox(
                                           fit: BoxFit.contain,
                                           child: AutoSizeText(
-                                            "Lapis Legit",
+                                            // "Lapis Legit",
+                                            (productList != null && productList!.isNotEmpty) ? productList![index].Nama_Produk : "Nama",
                                             style: GoogleFonts.poppins(
                                               textStyle: const TextStyle(
                                                 fontSize: 20.0,
@@ -499,7 +493,8 @@ class _CustomerHomePageState extends State<CustomerHomePage> {
                                         child: FittedBox(
                                           fit: BoxFit.contain,
                                           child: AutoSizeText(
-                                            "Cake",
+                                            // "Cake",
+                                            (productList != null && productList!.isNotEmpty) ? productList![index].ID_Kategori.toString() : "Kategori",
                                             style: GoogleFonts.poppins(
                                               textStyle: const TextStyle(
                                                 fontSize: 20.0,
@@ -522,7 +517,8 @@ class _CustomerHomePageState extends State<CustomerHomePage> {
                                         child: FittedBox(
                                           fit: BoxFit.contain,
                                           child: AutoSizeText(
-                                            "Rp. 10.000",
+                                            // "Rp. 10.000",
+                                            (productList != null && productList!.isNotEmpty) ? 'Rp. ${productList![index].Harga.toString()}' : "Rp. 10.000",
                                             style: GoogleFonts.poppins(
                                               textStyle: const TextStyle(
                                                 fontSize: 20.0,
@@ -580,9 +576,7 @@ class _CustomerHomePageState extends State<CustomerHomePage> {
                             ),
                           );
                         },
-                      ),
-
-
+                      ) : const Center(child: CircularProgressIndicator()),
                     ),
                   ),
                 ),

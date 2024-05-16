@@ -3,29 +3,29 @@
 import 'dart:convert';
 
 class KategoriModel {
-  int? id;
-  String namaKategori;
+  int? ID_Kategori;
+  String Nama_Kategori;
 
   KategoriModel({
-    this.id,
-    required this.namaKategori,
+    this.ID_Kategori,
+    required this.Nama_Kategori,
   });
 
   // Crate Empty Kategori Model
   factory KategoriModel.empty() => KategoriModel(
-    namaKategori: ''
+    Nama_Kategori: ''
   );
 
   // Update Placement
   factory KategoriModel.fromRawJson(String str) => KategoriModel.fromJson(json.decode(str));
   factory KategoriModel.fromJson(Map<String, dynamic> json) => KategoriModel(
-    id: json['id'],
-    namaKategori: json['nama_kategori'],
+    ID_Kategori: json['ID_Kategori'],
+    Nama_Kategori: json['Nama_Kategori'],
   );
 
   String toRawJson() => json.encode(toJson());
   Map<String, dynamic> toJson() => {
-    'id': id,
-    'nama_kategori': namaKategori,
+    'ID_Kategori': ID_Kategori,
+    'Nama_Kategori': Nama_Kategori,
   };
 }
