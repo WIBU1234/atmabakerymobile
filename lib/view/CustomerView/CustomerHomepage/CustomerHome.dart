@@ -1,4 +1,4 @@
-// ignore_for_file: file_names
+// ignore_for_file: file_names, sized_box_for_whitespace
 
 // View Import
 
@@ -24,6 +24,7 @@ class CustomerHomePage extends StatefulWidget {
 
 class _CustomerHomePageState extends State<CustomerHomePage> {
   int selectedIndex = -1;
+  int selectedKategori = -1;
   List<KategoriModel>? kategoriList;
   List<Product>? productList;
 
@@ -137,8 +138,10 @@ class _CustomerHomePageState extends State<CustomerHomePage> {
                               setState(() {
                                 if(selectedIndex == index) {
                                   selectedIndex = -1;
+                                  selectedKategori = -1;
                                 } else {
                                   selectedIndex = index;
+                                  selectedKategori = kategoriList![index].ID_Kategori!;
                                 }
                               });
                             },
@@ -172,7 +175,8 @@ class _CustomerHomePageState extends State<CustomerHomePage> {
                                     child: AutoSizeText(
                                       // kategoriList.length > 0 ? kategoriList[index].namaKategori : "Categories",
                                       // kategoriList!.length.toString(),
-                                      (kategoriList != null && kategoriList!.isNotEmpty) ? kategoriList![index].Nama_Kategori : "Categories",
+                                      // (kategoriList != null && kategoriList!.isNotEmpty) ? kategoriList![index].Nama_Kategori : "Categories",
+                                      (kategoriList != null && kategoriList!.isNotEmpty) ? kategoriList![index].ID_Kategori.toString() : "Categories",
                                       style: TextStyle(
                                         fontSize: 20.0,
                                         color: selectedIndex == index ? const Color(0xFFFFFFFF) : const Color(0xFF000000),
@@ -423,13 +427,16 @@ class _CustomerHomePageState extends State<CustomerHomePage> {
                       padding: const EdgeInsets.all(0),
 
                       child: (productList != null) ? GridView.builder(
-                        itemCount: productList!.length,
+                        itemCount: selectedIndex == -1 ? productList!.length : productList!.where((product) => product.ID_Kategori == selectedKategori).length,
                         gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                           crossAxisCount: 2,
                           childAspectRatio: 0.64,
                         ),
 
                         itemBuilder: (context, index) {
+                          var filteredProductList = selectedIndex == -1 ? productList! : productList!.where((product) => product.ID_Kategori == selectedKategori).toList();
+                          var product = filteredProductList[index];
+
                           return Padding(
                             padding: const EdgeInsets.all(4.0),
                             child: Container(
@@ -469,7 +476,8 @@ class _CustomerHomePageState extends State<CustomerHomePage> {
                                           fit: BoxFit.contain,
                                           child: AutoSizeText(
                                             // "Lapis Legit",
-                                            (productList != null && productList!.isNotEmpty) ? productList![index].Nama_Produk : "Nama",
+                                            // (productList != null && productList!.isNotEmpty) ? productList![index].Nama_Produk : "Nama",
+                                            (productList!.isNotEmpty) ? product.Nama_Produk : "Nama",
                                             style: GoogleFonts.poppins(
                                               textStyle: const TextStyle(
                                                 fontSize: 20.0,
@@ -494,7 +502,8 @@ class _CustomerHomePageState extends State<CustomerHomePage> {
                                           fit: BoxFit.contain,
                                           child: AutoSizeText(
                                             // "Cake",
-                                            (productList != null && productList!.isNotEmpty) ? productList![index].ID_Kategori.toString() : "Kategori",
+                                            // (productList != null && productList!.isNotEmpty) ? productList![index].ID_Kategori.toString() : "Kategori",
+                                            (productList!.isNotEmpty) ? product.ID_Kategori.toString() : "Kategori",
                                             style: GoogleFonts.poppins(
                                               textStyle: const TextStyle(
                                                 fontSize: 20.0,
@@ -518,7 +527,8 @@ class _CustomerHomePageState extends State<CustomerHomePage> {
                                           fit: BoxFit.contain,
                                           child: AutoSizeText(
                                             // "Rp. 10.000",
-                                            (productList != null && productList!.isNotEmpty) ? 'Rp. ${productList![index].Harga.toString()}' : "Rp. 10.000",
+                                            // (productList != null && productList!.isNotEmpty) ? 'Rp. ${productList![index].Harga.toString()}' : "Rp. 10.000",
+                                            (productList!.isNotEmpty) ? 'Rp. ${product.Harga.toString()}' : "Rp. 10.000",
                                             style: GoogleFonts.poppins(
                                               textStyle: const TextStyle(
                                                 fontSize: 20.0,
