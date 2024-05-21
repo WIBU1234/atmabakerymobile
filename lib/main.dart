@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:atmabakerymobile/view/generalView/onBoarding.dart';
 
 void main() {
+
   runApp(const MyApp());
 }
 

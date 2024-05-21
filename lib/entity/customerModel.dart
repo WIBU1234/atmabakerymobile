@@ -43,7 +43,7 @@ class Customer {
     noTelp: json['Nomor_telepon'],
     // poin: json['poin'],
     // saldo: json['saldo'],
-    profileImage: json['profileImage'],
+    profileImage: json['Profile'],
   );
 
   String toRawJson() => json.encode(toJson());

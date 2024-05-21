@@ -13,10 +13,12 @@ class DashboardCustomerPage extends StatefulWidget {
 }
 
 class _DashboardCustomerPageState extends State<DashboardCustomerPage> {
+
   int _selectedIndex = 0;
   
   @override
   Widget build(BuildContext context) {
+    
     Widget child = Container();
     switch (_selectedIndex) {
       case 0:

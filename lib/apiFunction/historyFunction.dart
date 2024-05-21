@@ -14,22 +14,19 @@ class HistoryHelper {
   static Future<List<History>> show() async {
     String apiURL = 'http://$url$endpoint/customer/history';
     String token = await LoginHelper().getToken();
-    try {
-      var apiResult = await client.get(
-        Uri.parse(apiURL),
-        headers: {
-          "Content-Type": "application/json",
-          "Authorization": "Bearer $token"},
-      );
-
-      if(apiResult.body.isNotEmpty) {
-        Iterable list = json.decode(apiResult.body)['data'];
-        return list.map((e) => History.fromJson(e)).toList();
-      } else {
-        return <History>[];
-      }
-    } catch(e) {
-      throw Exception(e.toString());
+    var apiResult = await client.get(
+      Uri.parse(apiURL),
+      headers: {
+        "Content-Type": "application/json",
+        "Authorization": "Bearer $token"},
+    );
+    
+    final jsonResponse = json.decode(apiResult.body);
+    if(jsonResponse['data'] != null) {
+      Iterable list = json.decode(apiResult.body)['data'];
+      return list.map((e) => History.fromJson(e)).toList();
+    } else {
+      return <History>[];
     }
   }
 
