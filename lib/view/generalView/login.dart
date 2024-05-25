@@ -1,13 +1,15 @@
 // View Import
 import 'package:atmabakerymobile/apiFunction/loginFunction.dart';
-import 'package:atmabakerymobile/view/CustomerView/dashboardCustomer.dart';
+// import 'package:atmabakerymobile/view/CustomerView/dashboardCustomer.dart';
 import 'package:atmabakerymobile/view/MOView/dashboardMO.dart';
 import 'package:atmabakerymobile/view/generalView/forgotPassword.dart';
+import 'package:atmabakerymobile/view/CustomerView/BottomNavbarController.dart';
 
 // Material Import
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:awesome_snackbar_content/awesome_snackbar_content.dart';
+import 'package:top_snackbar_flutter/custom_snack_bar.dart';
+import 'package:top_snackbar_flutter/top_snack_bar.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
@@ -35,40 +37,27 @@ class _LoginPageState extends State<LoginPage> {
 
       LoginHelper.login(email: email, password: password).then((result) async {
         if (result.email == '' && result.password == '') {
-          final snackBar = SnackBar(
-            elevation: 0,
-            backgroundColor: Colors.transparent,
-            content: AwesomeSnackbarContent(
-              title: 'Login Failed',
-              message: 'Please check your email and password!',
-              contentType: ContentType.failure,
-              inMaterialBanner: true,
+          showTopSnackBar(
+            Overlay.of(context),
+            const CustomSnackBar.error(
+              message:
+                'Login Failed! \nPlease check your email and password!',
             ),
           );
-
-          ScaffoldMessenger.of(context)
-            ..hideCurrentSnackBar()
-            ..showSnackBar(snackBar);
         } else {
-          final snackBar = SnackBar(
-            elevation: 0,
-            backgroundColor: Colors.transparent,
-            content: AwesomeSnackbarContent(
-              title: "Login Success",
-              message: "Welcome Back!",
-              contentType: ContentType.success,
-              inMaterialBanner: true,
+          showTopSnackBar(
+            Overlay.of(context),
+            CustomSnackBar.success(
+              message:
+                'Login Success! \nWelcome back $email!',
             ),
           );
-
-          ScaffoldMessenger.of(context)
-            ..hideCurrentSnackBar()
-            ..showSnackBar(snackBar);
 
           if (result.role == 'MO') {
             Navigator.push(context, MaterialPageRoute(builder: (context) => const DashboardMOPage()));
           } else {
-            Navigator.push(context, MaterialPageRoute(builder: (context) => const DashboardCustomerPage()));
+            // Navigator.push(context, MaterialPageRoute(builder: (context) => const DashboardCustomerPage()));
+            Navigator.push(context, MaterialPageRoute(builder: (context) => const NavBarController()));
           }
         }
       });
@@ -156,7 +145,7 @@ class _LoginPageState extends State<LoginPage> {
                                         errorStyle: const TextStyle(color: Colors.grey)
                                       ),
                                       style: const TextStyle(color: Colors.black),
-                                      validator: (value) => value == '' ? 'Please enter your email' : null,                                      
+                                      validator: (value) => value == '' ? 'Please enter your email' : null,
                                     ),
                                   ],
                                 ),
