@@ -2,35 +2,34 @@
 
 import 'dart:convert';
 import 'package:http/http.dart' as http;
-import 'package:atmabakerymobile/apiFunction/loginFunction.dart';
-import 'package:atmabakerymobile/entity/customerModel.dart';
+import 'package:atmabakerymobile/entity/productModel.dart';
 import 'package:atmabakerymobile/apiFunction/globalUrl.dart';
 
-class CustomerHelper {
+class ProductHelper {
   static http.Client client = http.Client();
   static const String protokol = GlobalURL.protokol;
   static const String url = GlobalURL.url;
   static const endpoint = GlobalURL.endpoint;
 
-  static Future<Customer> showProfile() async {
-    String apiURL = '$protokol$url$endpoint/customer';
-    String token = await LoginHelper().getToken();
+  Future<List<Product>> getAllShow() async {
+    String apiURL = '$protokol$url$endpoint/getProductAllForFrontEnd';
     try {
       var apiResult = await client.get(
         Uri.parse(apiURL),
         headers: {
           "Content-Type": "application/json",
-          "Authorization": "Bearer $token",
         }
       );
 
-      if (apiResult.statusCode == 200) {
-        return Customer.fromJson(json.decode(apiResult.body)['data']);
-      } else {
-        return Customer.empty();
-      }
+      if(apiResult.statusCode == 200) {
+        Iterable list = json.decode(apiResult.body)['data'];
+        List<Product> data = list.map((e) => Product.fromJson(e)).toList();
 
-    } catch (e) {
+        return data;
+      } else {
+        return <Product>[];
+      }
+    } catch(e) {
       throw Exception(e.toString());
     }
   }

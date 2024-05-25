@@ -6,7 +6,8 @@ import 'package:atmabakerymobile/apiFunction/loginFunction.dart';
 // Material Import
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:awesome_snackbar_content/awesome_snackbar_content.dart';
+import 'package:top_snackbar_flutter/custom_snack_bar.dart';
+import 'package:top_snackbar_flutter/top_snack_bar.dart';
 
 class ForgotPasswordPage extends StatefulWidget {
   const ForgotPasswordPage({super.key});
@@ -31,37 +32,21 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
 
       LoginHelper.sendEmail(email: email).then((result) async {
         if (result == false) {
-          final snackBar = SnackBar(
-            elevation: 0,
-            backgroundColor: Colors.transparent,
-            content: AwesomeSnackbarContent(
-              title: 'Send Failed',
-              message: 'Invalid email!',
-              contentType: ContentType.failure,
-              inMaterialBanner: true,
+          showTopSnackBar(
+            Overlay.of(context),
+            const CustomSnackBar.error(
+              message:
+                'Sending Email Failed! \nPlease check your email!',
             ),
           );
-
-          ScaffoldMessenger.of(context)
-            ..hideCurrentSnackBar()
-            ..showSnackBar(snackBar);
         } else {
-          final snackBar = SnackBar(
-            elevation: 0,
-            backgroundColor: Colors.transparent,
-            content: AwesomeSnackbarContent(
-              title: 'Send Email Success',
-              message: 'Please check your email for changing password!',
-              contentType: ContentType.success,
-              inMaterialBanner: true,
+          showTopSnackBar(
+            Overlay.of(context),
+            CustomSnackBar.success(
+              message:
+                'Sending Email Success! \nPlease check your email $email!',
             ),
-          );
-
-          ScaffoldMessenger.of(context)
-            ..hideCurrentSnackBar()
-            ..showSnackBar(snackBar);
-
-          
+          );          
           Navigator.pop(context);
         }
       });
@@ -137,20 +122,30 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
                                       const SizedBox(height: 4),
                                       TextFormField(
                                         controller: emailController,
-                                        decoration: const InputDecoration(
+                                        decoration: InputDecoration(
                                           filled: true,
-                                          fillColor: Color(0xFFC3C3B9),
-                                          enabledBorder: OutlineInputBorder(
+                                          fillColor: const Color(0xFFC3C3B9).withOpacity(0.7),
+                                          enabledBorder: const OutlineInputBorder(
                                             borderSide: BorderSide(color: Colors.white, width: 2.0)
                                           ),
-                                          focusedBorder: OutlineInputBorder(
+                                          focusedBorder: const OutlineInputBorder(
+                                            borderSide: BorderSide(color: Colors.white, width: 2.0)
+                                          ),
+                                          errorBorder: const OutlineInputBorder(
+                                            borderSide: BorderSide(color: Colors.white, width: 2.0)
+                                          ),
+                                          focusedErrorBorder: const OutlineInputBorder(
+                                            borderSide: BorderSide(color: Colors.white, width: 2.0)
+                                          ),
+                                          border: const OutlineInputBorder(
                                             borderSide: BorderSide(color: Colors.white, width: 2.0)
                                           ),
                                           hintText: 'Ketik Email Anda Disini ...',
-                                          hintStyle: TextStyle(color: Colors.black),
-                                          contentPadding: EdgeInsets.symmetric(vertical: 15.0, horizontal: 15.0),
-                                          errorStyle: TextStyle(color: Colors.white, fontSize: 15.0)
+                                          hintStyle: const TextStyle(color: Colors.black),
+                                          contentPadding: const EdgeInsets.symmetric(vertical: 15.0, horizontal: 15.0),
+                                          errorStyle: const TextStyle(color: Colors.grey)
                                         ),
+                                        style: const TextStyle(color: Colors.black),
                                         validator: (value) => value == '' ? 'Please enter your email' : null,                                      
                                       ),
                                     ],

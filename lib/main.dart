@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 // View
 import 'package:atmabakerymobile/view/generalView/onBoarding.dart';
+import 'package:atmabakerymobile/view/CustomerView/BottomNavbarController.dart';
 
 void main() {
 
@@ -20,7 +21,7 @@ class MyApp extends StatelessWidget {
         // colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),        
         useMaterial3: true,
       ),
-      home: const OnBoarding(),
+      home: const NavBarController(),
     );
   }
 }

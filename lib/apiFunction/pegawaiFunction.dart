@@ -8,11 +8,12 @@ import 'package:atmabakerymobile/apiFunction/loginFunction.dart';
 
 class PegawaiHelper {
   static http.Client client = http.Client();
+  static const String protokol = GlobalURL.protokol;
   static const String url = GlobalURL.url;
   static const endpoint = GlobalURL.endpoint;
 
   static Future<List<Pegawai>> show() async {
-    String apiURL = 'http://$url$endpoint/pegawai';
+    String apiURL = '$protokol$url$endpoint/pegawai';
     String token = await LoginHelper().getToken();
     try {
       var apiResult = await client.get(

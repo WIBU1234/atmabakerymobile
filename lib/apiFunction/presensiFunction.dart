@@ -8,11 +8,12 @@ import 'package:atmabakerymobile/apiFunction/globalUrl.dart';
 
 class PresensiHelper {
   static http.Client client = http.Client();
+  static const String protokol = GlobalURL.protokol;
   static const String url = GlobalURL.url;
   static const endpoint = GlobalURL.endpoint;
 
   static Future<Presensi> presensi({required int? ID_Pegawai, required String? Keterangan}) async {
-    String apiURL = 'http://$url$endpoint/presensi';
+    String apiURL = '$protokol$url$endpoint/presensi';
     String token = await LoginHelper().getToken();
     try {
       var apiResult = await client.post(
@@ -44,7 +45,7 @@ class PresensiHelper {
   }
 
   static Future<List<Presensi>> show() async {
-    String apiURL = 'http://$url$endpoint/presensi';
+    String apiURL = '$protokol$url$endpoint/presensi';
     String token = await LoginHelper().getToken();
     try {
       var apiResult = await client.get(
