@@ -10,6 +10,11 @@ import 'package:flutter_inset_box_shadow/flutter_inset_box_shadow.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
+import 'package:cloudinary_url_gen/transformation/effect/effect.dart';
+import 'package:cloudinary_url_gen/transformation/resize/resize.dart';
+import 'package:cloudinary_url_gen/transformation/transformation.dart';
+import 'package:cloudinary_flutter/image/cld_image.dart';
+
 import 'package:atmabakerymobile/entity/kategoriModel.dart';
 import 'package:atmabakerymobile/entity/productModel.dart';
 import 'package:atmabakerymobile/apiFunction/productFunction.dart';
@@ -454,16 +459,27 @@ class _CustomerHomePageState extends State<CustomerHomePage> {
                                 padding: const EdgeInsets.all(8.0),
                                 child: Column(
                                   children: <Widget>[
-                                      Container(
+                                    Container(
                                       width: screenWidth,
                                       height: screenHeight * 0.1,
-                                      
                                       decoration: BoxDecoration(
                                         borderRadius: BorderRadius.circular(4.0),
-                                        color: Colors.black,
+                                        // color: Colors.black,
+                                      ),
+                                      child: LayoutBuilder(
+                                        builder: (BuildContext context, BoxConstraints constraints) {
+                                          return CldImageWidget(
+                                            publicId: product.Gambar,
+                                            transformation: Transformation()
+                                              ..resize(Resize.fill()
+                                                ..width(constraints.maxWidth.toInt())
+                                                ..height(constraints.maxHeight.toInt()))
+                                              ..effect(Effect.sepia()),
+                                          );
+                                        },
                                       ),
                                     ),
-                            
+
                                     SizedBox(height: screenHeight * 0.006),
                                     Container(
                                       width: screenWidth,
