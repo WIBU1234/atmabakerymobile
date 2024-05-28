@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
-
+import 'package:cloudinary_flutter/cloudinary_object.dart';
 // View
 import 'package:atmabakerymobile/view/generalView/onBoarding.dart';
 import 'package:atmabakerymobile/view/CustomerView/BottomNavbarController.dart';
 
+late CloudinaryObject cld;
+
 void main() {
+  cld = new CloudinaryObject.fromCloudName(cloudName: 'dui6wroks');
   runApp(const MyApp());
 }
 

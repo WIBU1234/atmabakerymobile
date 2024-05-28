@@ -33,4 +33,31 @@ class ProductHelper {
       throw Exception(e.toString());
     }
   }
+
+  Future<List<Product>> showProductToday() async {
+    String apiURL = '$protokol$url$endpoint/produk-today';
+    try {
+      var apiResult = await client.get(
+        Uri.parse(apiURL),
+        headers: {
+          "Content-Type": "application/json",
+        }
+      );
+
+      print("Response status code: ${apiResult.statusCode}");
+      print("Response resason : ${apiResult.reasonPhrase}");
+      print("body: ${apiResult.body}");
+
+      if(apiResult.statusCode == 200) {
+        Iterable list = json.decode(apiResult.body)['data'];
+        List<Product> data = list.map((e) => Product.fromJson(e)).toList();
+
+        return data;
+      } else {
+        return <Product>[];
+      }
+    } catch (e) {
+      throw Exception(e.toString());
+    }
+  }
 }

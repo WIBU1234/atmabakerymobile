@@ -37,10 +37,6 @@ class LoginHelper{
         })
       );
 
-      // print("Response status code: ${apiResult.statusCode}");
-      // print("Response resason : ${apiResult.reasonPhrase}");
-      // print("body: ${apiResult.body}");
-
       if(apiResult.statusCode == 200) {
         token = LoginModel.fromJson(json.decode(apiResult.body)).token;
         LoginHelper().setToken(token.toString());
