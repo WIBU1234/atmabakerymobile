@@ -247,7 +247,7 @@ class _CustomerHomePageState extends State<CustomerHomePage> {
                                                           textStyle: const TextStyle(
                                                             fontSize: 18.0,
                                                             color: Color(0xFFFFFFFF),
-                                                            fontWeight: FontWeight.w500,
+                                                            fontWeight: FontWeight.w700,
                                                           ),
                                                         ),
                                                       ),
