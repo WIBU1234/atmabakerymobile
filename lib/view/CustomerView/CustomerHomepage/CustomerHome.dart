@@ -20,6 +20,11 @@ import 'package:atmabakerymobile/entity/productModel.dart';
 import 'package:atmabakerymobile/apiFunction/productFunction.dart';
 import 'package:atmabakerymobile/apiFunction/kategoriFunction.dart';
 
+import 'package:top_snackbar_flutter/custom_snack_bar.dart';
+import 'package:top_snackbar_flutter/top_snack_bar.dart';
+import 'dart:math';
+import 'package:carousel_slider/carousel_slider.dart';
+
 class CustomerHomePage extends StatefulWidget {
   const CustomerHomePage({super.key});
 
@@ -32,6 +37,7 @@ class _CustomerHomePageState extends State<CustomerHomePage> {
   int selectedKategori = -1;
   List<KategoriModel>? kategoriList;
   List<Product>? productList;
+  List<Product>? randomProductList;
 
   final TextEditingController searchController = TextEditingController();
 
@@ -51,8 +57,39 @@ class _CustomerHomePageState extends State<CustomerHomePage> {
     ProductHelper().getAllShow().then((value) {
       setState(() {
         productList = value;
+
+        if (productList != null && productList!.length >= 5) {
+          randomProductList = List<Product>.from(productList!);
+          randomProductList!.shuffle(Random());
+          randomProductList = randomProductList!.take(5).toList();
+        }
+
+        if (randomProductList != null && randomProductList!.isNotEmpty) {
+          // randomProductList contains at least one element
+        } else {
+          showTopSnackBar(
+            Overlay.of(context),
+            const CustomSnackBar.error(
+              message:
+                'Kosong',
+            ),
+          );
+        }
+
       });
     });
+  }
+
+  void toDoSearch(){
+    if(searchController.text.isEmpty){
+      showTopSnackBar(
+        Overlay.of(context),
+        const CustomSnackBar.error(
+          message:
+            'Silahkan isi field search terlebih dahulu',
+        ),
+      );
+    }
   }
 
   @override
@@ -101,6 +138,7 @@ class _CustomerHomePageState extends State<CustomerHomePage> {
                 ],
               ),
 
+              // Recomended Area
               Align(
                 alignment: const Alignment(0, -0.28),
                 child: Container(
@@ -109,6 +147,141 @@ class _CustomerHomePageState extends State<CustomerHomePage> {
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(10.0),
                     color: const Color(0xFF947257),
+                      // color: const Color(0xFF000000),
+                    ),
+
+                    child: Center(
+                      child: Padding(
+                        padding: const EdgeInsets.all(12.0),
+
+                        child: Container(
+                          width: screenWidth,
+                          height: screenHeight,
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(10),
+                            color: const Color(0xFF947257),
+                            boxShadow: const [
+                              BoxShadow(
+                                offset: Offset(-10, -10),
+                                blurRadius: 10,
+                                spreadRadius: -5,
+                                color: Color(0xFF745944),
+                                inset: true,
+                              ),
+                              BoxShadow(
+                                offset: Offset(10, 10),
+                                blurRadius: 10,
+                                spreadRadius: -5,
+                                color: Color(0xFF745944),
+                                inset: true,
+                              ),
+                            ],
+                          ),
+
+                          child: (randomProductList ?? []).isNotEmpty
+                            ? Center(
+                              child: CarouselSlider.builder(
+                              itemCount: (randomProductList?.length ?? 0),
+                              itemBuilder: (BuildContext context, int index, int realIndex) {
+                                final product = (randomProductList ?? [])[index];
+                                return LayoutBuilder(
+                                  builder: (BuildContext context, BoxConstraints constraints) {
+                                    return SizedBox.expand(
+                                      child: Container(
+                                        decoration: BoxDecoration(
+                                          borderRadius: BorderRadius.circular(10.0),
+                                          color: const Color(0xFF947257),
+                                        ),
+                                        child: Stack(
+                                          children: [
+                                            ClipRRect(
+                                              borderRadius: BorderRadius.circular(10.0),
+                                              child: CldImageWidget(
+                                                publicId: product.Gambar,
+                                                transformation: Transformation()
+                                                  ..resize(Resize.fill()
+                                                    ..width(constraints.maxWidth.toInt())
+                                                    ..height(constraints.maxHeight.toInt()))
+                                                  ..effect(Effect.sepia()),
+                                              ),
+                                            ),
+                                            Container(
+                                              decoration: BoxDecoration(
+                                                borderRadius: BorderRadius.circular(10.0),
+                                                boxShadow: const [
+                                                  BoxShadow(
+                                                    offset: Offset(-10, -10),
+                                                    blurRadius: 10,
+                                                    spreadRadius: -5,
+                                                    color: Color(0xFF745944),
+                                                    inset: true,
+                                                  ),
+                                                  BoxShadow(
+                                                    offset: Offset(10, 10),
+                                                    blurRadius: 10,
+                                                    spreadRadius: -5,
+                                                    color: Color(0xFF745944),
+                                                    inset: true,
+                                                  ),
+                                                ],
+                                              ),
+                                              child: Align(
+                                                alignment: Alignment.bottomRight,
+                                                child: Container(
+                                                  width: MediaQuery.of(context).size.width * 0.36,
+                                                  height: MediaQuery.of(context).size.height * 0.05,
+                                                  decoration: const BoxDecoration(
+                                                    borderRadius: BorderRadius.only(
+                                                      topLeft: Radius.circular(10.0),
+                                                      bottomRight: Radius.circular(10.0),
+                                                    ),
+                                                    color: Color(0xFF947257),
+                                                  ),
+                                                  child: Padding(
+                                                    padding: const EdgeInsets.all(8.0),
+                                                    child: FittedBox(
+                                                      fit: BoxFit.contain,
+                                                      child: AutoSizeText(
+                                                        product.Nama_Produk,
+                                                        style: GoogleFonts.poppins(
+                                                          textStyle: const TextStyle(
+                                                            fontSize: 18.0,
+                                                            color: Color(0xFFFFFFFF),
+                                                            fontWeight: FontWeight.w500,
+                                                          ),
+                                                        ),
+                                                      ),
+                                                    ),
+                                                  ),
+                                                ),
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+                                      ),
+                                    );
+                                  },
+                                );
+                              },
+                            options: CarouselOptions(
+                              height: screenHeight,
+                              autoPlay: true,
+                              viewportFraction: 1.0,
+                              enlargeCenterPage: false,
+                            ),
+                          ),
+                        )
+                      : Container(
+                          height: 400,
+                          child: const Center(
+                            child: Text(
+                              'No products available',
+                              style: TextStyle(fontSize: 18.0),
+                            ),
+                          ),
+                        ),
+                      ),
+                    ),
                   ),
                 ),
               ),
@@ -181,7 +354,7 @@ class _CustomerHomePageState extends State<CustomerHomePage> {
                                       // kategoriList.length > 0 ? kategoriList[index].namaKategori : "Categories",
                                       // kategoriList!.length.toString(),
                                       // (kategoriList != null && kategoriList!.isNotEmpty) ? kategoriList![index].Nama_Kategori : "Categories",
-                                      (kategoriList != null && kategoriList!.isNotEmpty) ? kategoriList![index].ID_Kategori.toString() : "Categories",
+                                      (kategoriList != null && kategoriList!.isNotEmpty) ? kategoriList![index].Nama_Kategori : "Categories",
                                       style: TextStyle(
                                         fontSize: 20.0,
                                         color: selectedIndex == index ? const Color(0xFFFFFFFF) : const Color(0xFF000000),
@@ -401,11 +574,17 @@ class _CustomerHomePageState extends State<CustomerHomePage> {
                               ],                      
                             ),
 
-                            child: const Center(
-                              child: Icon(
-                                FontAwesomeIcons.filter,
-                                color: Color(0xFFFFFFFF),
-                                size: 24.0,
+                            child: Center(
+                              child: GestureDetector(
+                                onTap: () {
+                                  toDoSearch();
+                                },
+
+                                child: const Icon(
+                                  FontAwesomeIcons.filter,
+                                  color: Color(0xFFFFFFFF),
+                                  size: 24.0,
+                                ),
                               ),
                             ),
                           ),
@@ -519,7 +698,9 @@ class _CustomerHomePageState extends State<CustomerHomePage> {
                                           child: AutoSizeText(
                                             // "Cake",
                                             // (productList != null && productList!.isNotEmpty) ? productList![index].ID_Kategori.toString() : "Kategori",
-                                            (productList!.isNotEmpty) ? product.ID_Kategori.toString() : "Kategori",
+                                            (productList!.isNotEmpty) 
+                                              ? kategoriList!.firstWhere((kategori) => kategori.ID_Kategori == product.ID_Kategori).Nama_Kategori
+                                              : "Kategori",
                                             style: GoogleFonts.poppins(
                                               textStyle: const TextStyle(
                                                 fontSize: 20.0,
@@ -563,6 +744,7 @@ class _CustomerHomePageState extends State<CustomerHomePage> {
                                         decoration: BoxDecoration(
                                           borderRadius: BorderRadius.circular(4.0),
                                           color: const Color(0xFF947257),
+                                          // color: const Color(0xFFffffff),
                                         ),
                             
                                         child: Padding(
