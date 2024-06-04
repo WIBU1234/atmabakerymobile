@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 
 import 'package:atmabakerymobile/view/MOView/MOPresensi/insertPresensi.dart';
 import 'package:atmabakerymobile/view/MOView/MOPresensi/showPresensi.dart';
+import 'package:atmabakerymobile/view/MOView/MOLaporanPBB/viewLaporanDashboard.dart';
 
 class DashboardMOPage extends StatefulWidget {
   const DashboardMOPage({super.key, this.id});
@@ -36,7 +37,7 @@ class _DashboardMOPageState extends State<DashboardMOPage> {
         break;
 
       case 2:
-        child = const Text('Laporan');
+        child = const ViewLaporanDashboard();
         break;
     }
     return Scaffold(
