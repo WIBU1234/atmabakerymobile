@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:cloudinary_url_gen/cloudinary.dart';
-import 'package:cloudinary_flutter/image/cld_image.dart';
 import 'package:cloudinary_flutter/cloudinary_context.dart';
 
 // View
@@ -25,7 +24,7 @@ class MyApp extends StatelessWidget {
         // colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),        
         useMaterial3: true,
       ),
-      home: const NavBarController(),
+      home: const OnBoarding(),
     );
   }
 }
