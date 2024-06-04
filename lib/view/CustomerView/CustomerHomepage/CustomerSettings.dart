@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart' hide BoxDecoration, BoxShadow;
 import 'package:flutter_inset_box_shadow/flutter_inset_box_shadow.dart';
-import 'package:top_snackbar_flutter/custom_snack_bar.dart';
-import 'package:top_snackbar_flutter/top_snack_bar.dart';
+
+import 'package:atmabakerymobile/view/CustomerView/CustomerGeneralSettings/RequestSaldoPage.dart';
+import 'package:atmabakerymobile/view/CustomerView/CustomerProfile/showProfile.dart';
 
 class SettingsPage extends StatefulWidget {
   const SettingsPage({super.key});
@@ -11,19 +12,23 @@ class SettingsPage extends StatefulWidget {
 }
 
 class _SettingsPageState extends State<SettingsPage> {
-
   @override
   void initState() {
     super.initState();
   }
 
-  void historySaldoPressed(){
-    showTopSnackBar(
-      Overlay.of(context),
-      const CustomSnackBar.error(
-        message:
-          'Kosong',
-      ),
+  void historySaldoPressed() {
+    // showTopSnackBar(
+    //   Overlay.of(context),
+    //   const CustomSnackBar.success(
+    //     message:
+    //       'Kosong',
+    //   ),
+    // );
+
+    Navigator.push(
+      context,
+      MaterialPageRoute(builder: (context) => const RequestSaldoPage()),
     );
   }
 
@@ -85,7 +90,6 @@ class _SettingsPageState extends State<SettingsPage> {
                               child: Column(
                                 mainAxisAlignment: MainAxisAlignment.start,
                                 children: <Widget>[
-
                                   const Align(
                                     alignment: Alignment.centerLeft,
                                     child: Text(
@@ -114,23 +118,35 @@ class _SettingsPageState extends State<SettingsPage> {
                                       padding: const EdgeInsets.all(16.0),
                                       child: SingleChildScrollView(
                                         child: Column(
-                                          mainAxisAlignment: MainAxisAlignment.center,
-                                          crossAxisAlignment: CrossAxisAlignment.center,
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.center,
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.center,
                                           children: <Widget>[
-                                            Align(
-                                              alignment: Alignment.centerLeft,
-                                              child: Container(
-                                                width: screenWidth,
-                                                // height: screenHeight * 0.05,
-                                                child: const Center(
-                                                  child: Align(
-                                                    alignment:
-                                                        Alignment.centerLeft,
-                                                    child: Text(
-                                                      'Profile',
-                                                      style: TextStyle(
-                                                        color: Colors.black,
-                                                        fontSize: 18,
+                                            GestureDetector(
+                                              onTap: () {
+                                                Navigator.push(
+                                                  context,
+                                                  MaterialPageRoute(
+                                                      builder: (context) =>
+                                                          const ShowProfile()),
+                                                );
+                                              },
+                                              child: Align(
+                                                alignment: Alignment.centerLeft,
+                                                child: Container(
+                                                  width: screenWidth,
+                                                  // height: screenHeight * 0.05,
+                                                  child: const Center(
+                                                    child: Align(
+                                                      alignment:
+                                                          Alignment.centerLeft,
+                                                      child: Text(
+                                                        'Profile',
+                                                        style: TextStyle(
+                                                          color: Colors.black,
+                                                          fontSize: 18,
+                                                        ),
                                                       ),
                                                     ),
                                                   ),
@@ -163,17 +179,17 @@ class _SettingsPageState extends State<SettingsPage> {
                                               onTap: () {
                                                 historySaldoPressed();
                                               },
-
                                               child: Container(
                                                 child: Align(
-                                                  alignment: Alignment.centerLeft,
+                                                  alignment:
+                                                      Alignment.centerLeft,
                                                   child: Container(
                                                     width: screenWidth,
                                                     // height: screenHeight * 0.05,
                                                     child: const Center(
                                                       child: Align(
-                                                        alignment:
-                                                            Alignment.centerLeft,
+                                                        alignment: Alignment
+                                                            .centerLeft,
                                                         child: Text(
                                                           'Request Saldo',
                                                           style: TextStyle(
@@ -234,9 +250,7 @@ class _SettingsPageState extends State<SettingsPage> {
                                       ),
                                     ),
                                   ),
-
                                   const SizedBox(height: 20),
-
                                   const Align(
                                     alignment: Alignment.centerLeft,
                                     child: Text(
@@ -265,8 +279,10 @@ class _SettingsPageState extends State<SettingsPage> {
                                       padding: const EdgeInsets.all(16.0),
                                       child: SingleChildScrollView(
                                         child: Column(
-                                          mainAxisAlignment: MainAxisAlignment.center,
-                                          crossAxisAlignment: CrossAxisAlignment.center,
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.center,
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.center,
                                           children: <Widget>[
                                             Align(
                                               alignment: Alignment.centerLeft,
@@ -335,7 +351,6 @@ class _SettingsPageState extends State<SettingsPage> {
                                       ),
                                     ),
                                   )
-
                                 ],
                               ),
                             ),
