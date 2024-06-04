@@ -5,6 +5,7 @@ import 'package:atmabakerymobile/entity/customResult.dart';
 import 'package:http/http.dart' as http;
 import 'package:atmabakerymobile/apiFunction/loginFunction.dart';
 import 'package:atmabakerymobile/entity/customerModel.dart';
+import 'package:atmabakerymobile/entity/customerHistorySaldo.dart';
 import 'package:atmabakerymobile/apiFunction/globalUrl.dart';
 
 class CustomerHelper {
@@ -57,6 +58,30 @@ class CustomerHelper {
         var responseBody = json.decode(apiResult.body);
         String errorMessage = responseBody['message'];
         return CustomResult(false, errorMessage);
+      }
+
+    } catch (e) {
+      throw Exception(e.toString());
+    }
+  }
+
+  static Future<List<CustomerHistorySaldo>> showHistorySaldo() async {
+    String apiURL = '$protokol$url$endpoint/customerSaldo';
+    String token = await LoginHelper().getToken();
+    try {
+      var apiResult = await client.get(
+        Uri.parse(apiURL),
+        headers: {
+          "Content-Type": "application/json",
+          "Authorization": "Bearer $token",
+        }
+      );
+
+      if (apiResult.statusCode == 200) {
+        List<dynamic> data = json.decode(apiResult.body)['data'];
+        return data.map((e) => CustomerHistorySaldo.fromJson(e)).toList();
+      } else {
+        return [];
       }
 
     } catch (e) {

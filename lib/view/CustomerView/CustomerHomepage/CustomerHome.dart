@@ -262,23 +262,16 @@ class _CustomerHomePageState extends State<CustomerHomePage> {
                                                             Color(0xFF947257),
                                                       ),
                                                       child: Padding(
-                                                        padding:
-                                                            const EdgeInsets
-                                                                .all(8.0),
+                                                        padding: const EdgeInsets.all(8.0),
                                                         child: FittedBox(
                                                           fit: BoxFit.contain,
                                                           child: AutoSizeText(
                                                             product.Nama_Produk,
-                                                            style: GoogleFonts
-                                                                .poppins(
-                                                              textStyle:
-                                                                  const TextStyle(
+                                                            style: GoogleFonts.poppins(
+                                                              textStyle:const TextStyle(
                                                                 fontSize: 18.0,
-                                                                color: Color(
-                                                                    0xFFFFFFFF),
-                                                                fontWeight:
-                                                                    FontWeight
-                                                                        .w700,
+                                                                color: Color(0xFFFFFFFF),
+                                                                fontWeight: FontWeight.w700,
                                                               ),
                                                             ),
                                                           ),

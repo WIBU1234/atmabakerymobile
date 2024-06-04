@@ -8,6 +8,7 @@ import 'package:top_snackbar_flutter/top_snack_bar.dart';
 
 import 'package:atmabakerymobile/entity/customerModel.dart';
 import 'package:atmabakerymobile/entity/customResult.dart';
+import 'package:atmabakerymobile/entity/customerHistorySaldo.dart';
 import 'package:atmabakerymobile/apiFunction/customerFunction.dart';
 
 class RequestSaldoPage extends StatefulWidget {
@@ -19,6 +20,8 @@ class RequestSaldoPage extends StatefulWidget {
 
 class _RequestSaldoPageState extends State<RequestSaldoPage> {
   Customer customer = Customer.empty();
+  List<CustomerHistorySaldo> historySaldo = [];
+
   bool isLoading = true;
   final TextEditingController textController = TextEditingController();
 
@@ -27,6 +30,23 @@ class _RequestSaldoPageState extends State<RequestSaldoPage> {
     setState(() {
       isLoading = false;
     });
+  }
+
+  void fetchDataSaldo() async {
+    historySaldo = await CustomerHelper.showHistorySaldo();
+
+    if (!mounted) return;
+
+    if(historySaldo.isEmpty){
+      showTopSnackBar(
+        Overlay.of(context),
+        const CustomSnackBar.error(
+          message: 'You dont have a history saldo yet',
+        ),
+      );
+    }else{
+
+    }
   }
 
   void requestSaldo() async {
@@ -90,7 +110,26 @@ class _RequestSaldoPageState extends State<RequestSaldoPage> {
   @override
   void initState() {
     loadData();
+    fetchDataSaldo();
     super.initState();
+  }
+
+  void toNotificationEachHistory(bool target){
+    if(!target){
+      showTopSnackBar(
+        Overlay.of(context),
+        const CustomSnackBar.error(
+          message: 'Your request either pending or no approved',
+        ),
+      );
+    }else{
+      showTopSnackBar(
+        Overlay.of(context),
+        const CustomSnackBar.success(
+          message: 'Your request approved',
+        ),
+      );
+    }
   }
 
   @override
@@ -344,7 +383,138 @@ class _RequestSaldoPageState extends State<RequestSaldoPage> {
                                 const SizedBox(height: 20),
                                 Expanded(
                                   child: Container(
-                                    color: Colors.blue,
+                                    // color: Colors.blue,
+
+                                    child: SingleChildScrollView(
+                                      child: Column(
+                                        mainAxisAlignment: MainAxisAlignment.end,
+                                        crossAxisAlignment: CrossAxisAlignment.start,
+
+                                        children: [                                          
+                                          ...historySaldo.map((item) {
+                                            return Column(
+                                              children: [
+                                                Container(
+                                                  width: screenWidth,
+                                                  height: screenHeight * 0.09,
+                                                  decoration: BoxDecoration(
+                                                    borderRadius: BorderRadius.circular(20.0),
+                                                    // color: Colors.white,
+                                                    boxShadow: const [
+                                                      BoxShadow(
+                                                        offset: Offset(-100, -100),
+                                                        blurRadius: 10,
+                                                        color: Color(0xFFFFFFFF),
+                                                        inset: true,
+                                                      ),
+                                                      BoxShadow(
+                                                        offset: Offset(10, 10),
+                                                        blurRadius: 10,
+                                                        color: Color(0xFF919191),
+                                                        inset: true,
+                                                      ),
+                                                    ],
+                                                  ),
+
+                                                  child: Padding(
+                                                    padding: const EdgeInsets.all(8.0),
+                                                    child: Row(
+                                                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                                      children: [
+                                                        Container(
+                                                          width: screenWidth * 0.6,
+                                                          height: screenHeight,
+                                                          // color: Colors.amber,
+
+                                                          child: Padding(
+                                                            padding: const EdgeInsets.only(left: 10),
+                                                            child: Column(
+                                                              crossAxisAlignment: CrossAxisAlignment.start,
+                                                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                                                            
+                                                              children: [
+                                                                FittedBox(
+                                                                  fit: BoxFit.contain,
+                                                                  child: AutoSizeText(
+                                                                    item.total.toString(),
+                                                                    style: GoogleFonts.poppins(
+                                                                      textStyle:const TextStyle(
+                                                                        fontSize: 18.0,
+                                                                        color: Color(0xFF000000),
+                                                                        fontWeight: FontWeight.w700,
+                                                                      ),
+                                                                    ),
+                                                                  ),
+                                                                ),
+                                                            
+                                                                FittedBox(
+                                                                  fit: BoxFit.contain,
+                                                                  child: AutoSizeText(
+                                                                    (item.tanggal?.toString() ?? 'Pending or Rejected'),
+                                                                    style: GoogleFonts.poppins(
+                                                                      textStyle:const TextStyle(
+                                                                        fontSize: 18.0,
+                                                                        color: Color(0xFF000000),
+                                                                        fontWeight: FontWeight.w500,
+                                                                      ),
+                                                                    ),
+                                                                  ),
+                                                                ),
+                                                            
+                                                              ],
+                                                            ),
+                                                          ),
+                                                        ),
+                                                    
+                                                        Container(
+                                                          width: screenWidth * 0.16,
+                                                          height: screenHeight,
+                                                          // color: Colors.amber,
+
+                                                          decoration: BoxDecoration(
+                                                            borderRadius: BorderRadius.circular(10.0),
+                                                            color: Colors.white,
+                                                            boxShadow: [
+                                                              BoxShadow(
+                                                                offset: const Offset(-100, -100),
+                                                                blurRadius: 10,
+                                                                color: item.tanggal == null ? const Color(0xFFC67C4E) : const Color(0xFF9C623D),
+                                                                inset: true,
+                                                              ),
+                                                              BoxShadow(
+                                                                offset: const Offset(10, 10),
+                                                                blurRadius: 10,
+                                                                color: item.tanggal == null ? const Color(0xFFC67C4E) : const Color(0xFF9C623D),
+                                                                inset: true,
+                                                              ),
+                                                            ],
+                                                          ),
+
+                                                          child: Center(
+                                                            child: GestureDetector(
+                                                              onTap: () {
+                                                                toNotificationEachHistory(item.tanggal == null ? false : true);
+                                                              },
+                                                              child: Icon(
+                                                                item.tanggal == null ? FontAwesomeIcons.xmark : FontAwesomeIcons.check,
+                                                                color: const Color(0xFFFFFFFF),
+                                                                size: 24.0,
+                                                              ),
+                                                            ),
+                                                          ),
+                                                        ),
+                                                      ],
+                                                    ),
+                                                  ),
+
+                                                ),
+                                                const SizedBox(height: 10),
+                                              ],
+                                            );
+                                          }).toList(),
+                                        ],
+                                      ),
+                                    ),
                                   ),
                                 ),
                               ],
