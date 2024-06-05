@@ -129,21 +129,22 @@ class _BrowseViewState extends State<BrowseView> {
                                             ),
                                           ),
                                         ),
-                                      Container(
-                                        padding: EdgeInsets.symmetric(horizontal: 8.0, vertical: 4.0),
-                                        decoration: BoxDecoration(
-                                          color: Colors.orange,
-                                          borderRadius: BorderRadius.circular(12.0),
-                                        ),
-                                        child: Text(
-                                          '${product.StokReady}',
-                                          style: TextStyle(
-                                            fontSize: 14.0,
-                                            fontWeight: FontWeight.bold,
-                                            color: Colors.white,
+                                      if (product.StokReady > 0)
+                                        Container(
+                                          padding: EdgeInsets.symmetric(horizontal: 8.0, vertical: 4.0),
+                                          decoration: BoxDecoration(
+                                            color: Colors.orange,
+                                            borderRadius: BorderRadius.circular(12.0),
+                                          ),
+                                          child: Text(
+                                            '${product.StokReady}',
+                                            style: TextStyle(
+                                              fontSize: 14.0,
+                                              fontWeight: FontWeight.bold,
+                                              color: Colors.white,
+                                            ),
                                           ),
                                         ),
-                                      ),
                                     ],
                                   )
                                 ],
