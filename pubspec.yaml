@@ -33,6 +33,7 @@ dependencies:
   cloudinary_url_gen: ^1.0.0
 
   carousel_slider: ^4.2.1
+  pdf: ^3.10.8
 
 dev_dependencies:
   flutter_test:
