@@ -8,7 +8,7 @@ class Customer {
   String? email;
   String? noTelp;
   int? poin;
-  double? saldo;
+  int? saldo;
   int? otp;
   String? profileImage;
 
@@ -42,8 +42,8 @@ class Customer {
     email: json['email'],
     noTelp: json['Nomor_telepon'],
     // poin: json['poin'],
-    // saldo: json['saldo'],
-    profileImage: json['Profile'],
+    saldo: json['Saldo'],
+    profileImage: json['profileImage'],
   );
 
   String toRawJson() => json.encode(toJson());

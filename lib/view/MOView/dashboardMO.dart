@@ -1,9 +1,9 @@
 // ignore_for_file: file_names
 
 import 'package:flutter/material.dart';
-
 import 'package:atmabakerymobile/view/MOView/MOPresensi/insertPresensi.dart';
 import 'package:atmabakerymobile/view/MOView/MOPresensi/showPresensi.dart';
+import 'package:atmabakerymobile/view/MOView/MOLaporanView/MOLaporanView.dart';
 import 'package:atmabakerymobile/view/MOView/MOLaporanPBB/viewLaporanDashboard.dart';
 
 class DashboardMOPage extends StatefulWidget {
@@ -37,6 +37,10 @@ class _DashboardMOPageState extends State<DashboardMOPage> {
         break;
 
       case 2:
+        child = const MOLaporanViewPage();
+        break;
+
+      case 3:
         child = const ViewLaporanDashboard();
         break;
     }
