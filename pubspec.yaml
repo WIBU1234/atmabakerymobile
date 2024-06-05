@@ -11,8 +11,6 @@ dependencies:
     sdk: flutter
   cupertino_icons: ^1.0.6
   shared_preferences: ^2.2.3
-  cloudinary_flutter: ^1.0.0
-  cloudinary_url_gen: ^1.0.0
   
   responsive_sizer: ^3.3.1
 
@@ -38,7 +36,6 @@ dependencies:
   cloudinary_url_gen: ^1.0.0
 
   carousel_slider: ^4.2.1
-  pdf: ^3.10.8
 
 dev_dependencies:
   flutter_test:
