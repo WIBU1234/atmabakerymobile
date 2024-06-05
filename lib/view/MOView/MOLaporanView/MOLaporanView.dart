@@ -53,11 +53,7 @@ class _MOLaporanViewPageState extends State<MOLaporanViewPage> {
         const CustomSnackBar.success(
           message: 'Success send data',
         ),
-      );
-
-      print(report);
-
-      
+      );      
     }else{
       showTopSnackBar(
         Overlay.of(context),
