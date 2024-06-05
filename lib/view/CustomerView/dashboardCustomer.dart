@@ -3,6 +3,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:atmabakerymobile/view/CustomerView/CustomerHistory/showHistory.dart';
+import 'package:atmabakerymobile/view/CustomerView/CustomerHistory/CustomerHistorySelesai/showHistoryDikirim.dart';
 import 'package:atmabakerymobile/view/CustomerView/CustomerProfile/showProfile.dart';
 
 class DashboardCustomerPage extends StatefulWidget {
@@ -13,10 +14,12 @@ class DashboardCustomerPage extends StatefulWidget {
 }
 
 class _DashboardCustomerPageState extends State<DashboardCustomerPage> {
+
   int _selectedIndex = 0;
   
   @override
   Widget build(BuildContext context) {
+    
     Widget child = Container();
     switch (_selectedIndex) {
       case 0:
@@ -24,6 +27,10 @@ class _DashboardCustomerPageState extends State<DashboardCustomerPage> {
         break;
 
       case 1:
+        child = const ShowHistorySelesai();
+        break;
+
+      case 2:
         child = const ShowProfile();
         break;
     }
@@ -34,11 +41,11 @@ class _DashboardCustomerPageState extends State<DashboardCustomerPage> {
       body: Center(
         child: child,
       ),
-      bottomNavigationBar: _bottomNavBar(),
+      bottomNavigationBar: bottomNavBar(),
     );
   }
 
-  Widget _bottomNavBar() {
+  Widget bottomNavBar() {
     return BottomNavigationBar(
       backgroundColor: const Color(0xFFC67C4E),
       currentIndex: _selectedIndex,

@@ -9,6 +9,8 @@ import "package:persistent_bottom_nav_bar/persistent_tab_view.dart";
 // Import View
 import "package:atmabakerymobile/view/generalView/onBoarding.dart";
 import "package:atmabakerymobile/view/CustomerView/CustomerHomepage/CustomerHome.dart";
+import "package:atmabakerymobile/view/CustomerView/CustomerHomepage/CustomerSettings.dart";
+import "package:atmabakerymobile/view/CustomerView/CustomerHomepage/CustomerSearchPage.dart";
 import "package:atmabakerymobile/view/CustomerView/CustomerHomepage/CustomerBrowse.dart";
 
 class NavBarController extends StatelessWidget {
@@ -22,9 +24,10 @@ class NavBarController extends StatelessWidget {
     List<Widget> buildScreens() {
         return [
           const CustomerHomePage(),
+          const SearchFromHomePage(),
           const BrowseView(),
           const OnBoarding(),
-          const OnBoarding(),
+          const SettingsPage(),
         ];
     }
 

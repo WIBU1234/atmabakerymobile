@@ -23,7 +23,6 @@ class LoginHelper{
     return prefs.getString('token').toString();
   }
 
-
   static Future<LoginModel> login({required String email, required String password}) async {
     String apiURL = '$protokol$url$endpoint/login';
     String? token;

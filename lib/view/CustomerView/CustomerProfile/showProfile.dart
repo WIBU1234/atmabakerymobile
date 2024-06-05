@@ -3,7 +3,14 @@
 import 'package:atmabakerymobile/entity/customerModel.dart';
 import 'package:atmabakerymobile/apiFunction/customerFunction.dart';
 import 'package:atmabakerymobile/view/generalView/login.dart';
+import 'package:cloudinary_url_gen/transformation/resize/resize.dart';
+import 'package:cloudinary_url_gen/transformation/transformation.dart';
 import 'package:flutter/material.dart';
+
+import 'package:cloudinary_url_gen/cloudinary.dart';
+import 'package:cloudinary_flutter/image/cld_image.dart';
+import 'package:cloudinary_flutter/cloudinary_context.dart';
+
 
 class ShowProfile extends StatefulWidget {
   const ShowProfile({super.key});
@@ -22,7 +29,6 @@ class _ShowProfileState extends State<ShowProfile> {
       isLoading = false;
     });
   }
-
   @override
   void initState() {
     super.initState();
@@ -30,6 +36,9 @@ class _ShowProfileState extends State<ShowProfile> {
   }
   @override
   Widget build(BuildContext context) {
+    print('data gambar : ${customer.profileImage}');
+    // ignore: deprecated_member_use
+    CloudinaryContext.cloudinary = Cloudinary.fromCloudName(cloudName: 'dui6wroks');
     return Scaffold(
       body: SingleChildScrollView(
         child: Container(
@@ -50,11 +59,13 @@ class _ShowProfileState extends State<ShowProfile> {
                           width: 200,
                           height: 200,
                           padding: const EdgeInsets.only(top: 20),
-                          child: const CircleAvatar(
-                            backgroundColor: Colors.transparent,
-                            backgroundImage: AssetImage('assets/images/profile.png'),
-                            radius: 100,
-                          ),
+                          child: CldImageWidget(
+                            publicId: customer.profileImage ?? 'cld-sample',
+                            transformation: Transformation()
+                            ..resize(Resize.fill()
+                              ..width(250)
+                              ..height(250)),
+                          )
                         ),
                       ),
                       const SizedBox(height: 20),
@@ -130,6 +141,33 @@ class _ShowProfileState extends State<ShowProfile> {
                         ),
                         child: const Text(
                         "Logout",
+                        style: TextStyle(
+                            fontSize: 20,
+                            fontWeight: FontWeight.bold,
+                            color: Colors.black),
+                        ),
+                      ),
+                      const SizedBox(height: 20),
+                      TextButton(
+                        onPressed: () {
+                          Navigator.pop(
+                            context
+                          );
+                        },
+                        style: ButtonStyle(
+                          backgroundColor: MaterialStateProperty.all(
+                              const Color.fromARGB(255, 255, 116, 107)),
+                          padding: MaterialStateProperty.all(
+                              const EdgeInsets.symmetric(horizontal: 100, vertical: 20)),
+                          foregroundColor: MaterialStateProperty.all(Colors.white),
+                          shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                            RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(20),
+                            ),
+                          ),
+                        ),
+                        child: const Text(
+                        "Back",
                         style: TextStyle(
                             fontSize: 20,
                             fontWeight: FontWeight.bold,
