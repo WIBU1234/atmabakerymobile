@@ -47,11 +47,11 @@ class _DashboardMOPageState extends State<DashboardMOPage> {
       body: Center(
         child: child,
       ),
-      bottomNavigationBar: _bottomNavBar(),
+      bottomNavigationBar: bottomNavBar(),
     );
   }
 
-  Widget _bottomNavBar() {
+  Widget bottomNavBar() {
     return BottomNavigationBar(
       backgroundColor: const Color(0xFFC67C4E),
       currentIndex: _selectedIndex,
