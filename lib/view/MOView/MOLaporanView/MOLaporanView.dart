@@ -1,3 +1,5 @@
+// ignore_for_file: file_names
+
 import 'package:flutter/material.dart' hide BoxDecoration, BoxShadow;
 import 'package:flutter_inset_box_shadow/flutter_inset_box_shadow.dart';
 import 'package:top_snackbar_flutter/custom_snack_bar.dart';
@@ -179,7 +181,7 @@ class _MOLaporanViewPageState extends State<MOLaporanViewPage> {
                       ),
                     ),
                   ),
-                )
+                ),
               ],
             ),
           ),

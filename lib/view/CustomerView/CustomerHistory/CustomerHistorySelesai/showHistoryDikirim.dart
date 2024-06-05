@@ -47,17 +47,23 @@ class _ShowHistorySelesaiState extends State<ShowHistorySelesai> {
         itemCount: history.length,
         itemBuilder: (context, index) {
           return Card(
+            margin: const EdgeInsets.only(left: 10, right: 10, bottom: 10),
             child: ListTile(
               title: Text(history[index].Tanggal_Transaksi.toString()),
               subtitle: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(history[index].ID_Transaksi.toString()),
-                  const SizedBox(width: 10),
-                  Text(history[index].Status.toString()),
-                  const SizedBox(width: 10),
-                  ButtonUpdateStatus(context, history[index].ID_Transaksi.toString())
-                ]
-              ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text(history[index].ID_Transaksi.toString()),
+                      Text(history[index].Status.toString()),
+                    ],
+                  ),
+                  const SizedBox(height: 10),
+                  ButtonUpdateStatus(context, history[index].ID_Transaksi.toString(), history[index].Status.toString())
+                ],
+              )
             ),
           );
         },
@@ -65,20 +71,25 @@ class _ShowHistorySelesaiState extends State<ShowHistorySelesai> {
     );
   }
 
-  Container ButtonUpdateStatus(BuildContext context, String idTransaksi) {
+  Container ButtonUpdateStatus(BuildContext context, String idTransaksi, String status) {
     return Container(
-      child: FloatingActionButton(
-        onPressed: () async {
-          await HistoryHelper.putTransaksiSelesai(id_transaksi: idTransaksi);
-          showTopSnackBar(
-            Overlay.of(context),
-            const CustomSnackBar.success(
-              message: 'Berhasil mengupdate status !!',
-            ),
-          );
-          loadData();
-        },
-        child : const Text('Update Status')
+      child: SizedBox(
+        height: 40,
+        width: 200,  // Adjust the width as needed
+        child: status == "Selesai" ? null : FloatingActionButton.extended(
+          backgroundColor: Colors.green,
+          onPressed: () async {
+            await HistoryHelper.putTransaksiSelesai(id_transaksi: idTransaksi);
+            showTopSnackBar(
+              Overlay.of(context),
+              const CustomSnackBar.success(
+                message: 'Berhasil mengupdate status !!',
+              ),
+            );
+            loadData();
+          },
+          label: const Text('Update Status'),
+        ),
       ),
     );
   }
