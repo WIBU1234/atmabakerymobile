@@ -10,7 +10,6 @@ class DashboardMOPage extends StatefulWidget {
   const DashboardMOPage({super.key, this.id});
   final int? id;
 
-
   @override
   State<DashboardMOPage> createState() => _DashboardMOPageState();
 }
