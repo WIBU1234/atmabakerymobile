@@ -22,76 +22,76 @@ class NavBarController extends StatelessWidget {
     controller = PersistentTabController(initialIndex: 0);
 
     List<Widget> buildScreens() {
-        return [
-          const CustomerHomePage(),
-          const SearchFromHomePage(),
-          const BrowseView(),
-          const OnBoarding(),
-          const SettingsPage(),
-        ];
+      return [
+        const CustomerHomePage(),
+        //const SearchFromHomePage(),
+        const BrowseView(),
+        const OnBoarding(),
+        const SettingsPage(),
+      ];
     }
 
     List<PersistentBottomNavBarItem> navBarsItems() {
       return [
-          PersistentBottomNavBarItem(
-              icon: const Icon(CupertinoIcons.home),
-              title: ("HomePage"),
-              // activeColorPrimary: CupertinoColors.activeGreen,
-              activeColorPrimary: CupertinoColors.black,
-              // activeColorPrimary: const Color(0xFFF9F2ED),
-              inactiveColorPrimary: CupertinoColors.systemGrey,
-          ),
-          PersistentBottomNavBarItem(
-              icon: const Icon(FontAwesomeIcons.globe),
-              title: ("Browse"),
-              // activeColorPrimary: CupertinoColors.activeGreen,
-              activeColorPrimary: CupertinoColors.black,
-              inactiveColorPrimary: CupertinoColors.systemGrey,
-          ),
-          PersistentBottomNavBarItem(
-              icon: const Icon(CupertinoIcons.cart),
-              title: ("Cart"),
-              // activeColorPrimary: CupertinoColors.activeGreen,
-              activeColorPrimary: CupertinoColors.black,
-              inactiveColorPrimary: CupertinoColors.systemGrey,
-          ),
-          PersistentBottomNavBarItem(
-              icon: const Icon(CupertinoIcons.settings),
-              title: ("Settings"),
-              // activeColorPrimary: CupertinoColors.activeGreen,
-              activeColorPrimary: CupertinoColors.black,
-              inactiveColorPrimary: CupertinoColors.systemGrey,
-          ),
+        PersistentBottomNavBarItem(
+          icon: const Icon(CupertinoIcons.home),
+          title: ("HomePage"),
+          // activeColorPrimary: CupertinoColors.activeGreen,
+          activeColorPrimary: CupertinoColors.black,
+          // activeColorPrimary: const Color(0xFFF9F2ED),
+          inactiveColorPrimary: CupertinoColors.systemGrey,
+        ),
+        PersistentBottomNavBarItem(
+          icon: const Icon(FontAwesomeIcons.globe),
+          title: ("Browse"),
+          // activeColorPrimary: CupertinoColors.activeGreen,
+          activeColorPrimary: CupertinoColors.black,
+          inactiveColorPrimary: CupertinoColors.systemGrey,
+        ),
+        PersistentBottomNavBarItem(
+          icon: const Icon(CupertinoIcons.cart),
+          title: ("Cart"),
+          // activeColorPrimary: CupertinoColors.activeGreen,
+          activeColorPrimary: CupertinoColors.black,
+          inactiveColorPrimary: CupertinoColors.systemGrey,
+        ),
+        PersistentBottomNavBarItem(
+          icon: const Icon(CupertinoIcons.settings),
+          title: ("Settings"),
+          // activeColorPrimary: CupertinoColors.activeGreen,
+          activeColorPrimary: CupertinoColors.black,
+          inactiveColorPrimary: CupertinoColors.systemGrey,
+        ),
       ];
     }
 
     return PersistentTabView(
-        context,
-        controller: controller,
-        screens: buildScreens(),
-        items: navBarsItems(),
-        confineInSafeArea: true,
-        backgroundColor: Colors.white,
-        handleAndroidBackButtonPress: true,
-        resizeToAvoidBottomInset: true,
-        stateManagement: true,
-        hideNavigationBarWhenKeyboardShows: true,
-        decoration: NavBarDecoration(
-          borderRadius: BorderRadius.circular(10.0),
-          colorBehindNavBar: Colors.white,
-        ),
-        popAllScreensOnTapOfSelectedTab: true,
-        popActionScreens: PopActionScreensType.all,
-        itemAnimationProperties: const ItemAnimationProperties(
-          duration: Duration(milliseconds: 200),
-          curve: Curves.ease,
-        ),
-        screenTransitionAnimation: const ScreenTransitionAnimation(
-          animateTabTransition: true,
-          curve: Curves.ease,
-          duration: Duration(milliseconds: 200),
-        ),
-        navBarStyle: NavBarStyle.style3,
+      context,
+      controller: controller,
+      screens: buildScreens(),
+      items: navBarsItems(),
+      confineInSafeArea: true,
+      backgroundColor: Colors.white,
+      handleAndroidBackButtonPress: true,
+      resizeToAvoidBottomInset: true,
+      stateManagement: true,
+      hideNavigationBarWhenKeyboardShows: true,
+      decoration: NavBarDecoration(
+        borderRadius: BorderRadius.circular(10.0),
+        colorBehindNavBar: Colors.white,
+      ),
+      popAllScreensOnTapOfSelectedTab: true,
+      popActionScreens: PopActionScreensType.all,
+      itemAnimationProperties: const ItemAnimationProperties(
+        duration: Duration(milliseconds: 200),
+        curve: Curves.ease,
+      ),
+      screenTransitionAnimation: const ScreenTransitionAnimation(
+        animateTabTransition: true,
+        curve: Curves.ease,
+        duration: Duration(milliseconds: 200),
+      ),
+      navBarStyle: NavBarStyle.style3,
     );
   }
 }

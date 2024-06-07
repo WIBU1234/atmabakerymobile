@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:atmabakerymobile/view/CustomerView/CustomerHistory/showHistory.dart';
 import 'package:atmabakerymobile/view/CustomerView/CustomerHistory/CustomerHistorySelesai/showHistoryDikirim.dart';
 import 'package:atmabakerymobile/view/CustomerView/CustomerProfile/showProfile.dart';
+import 'package:atmabakerymobile/view/CustomerView/BottomNavbarController.dart';
 
 class DashboardCustomerPage extends StatefulWidget {
   const DashboardCustomerPage({super.key});
@@ -14,12 +15,10 @@ class DashboardCustomerPage extends StatefulWidget {
 }
 
 class _DashboardCustomerPageState extends State<DashboardCustomerPage> {
-
   int _selectedIndex = 0;
-  
+
   @override
   Widget build(BuildContext context) {
-    
     Widget child = Container();
     switch (_selectedIndex) {
       case 0:
