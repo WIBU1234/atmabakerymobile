@@ -7,10 +7,12 @@ import "package:flutter/material.dart";
 import "package:persistent_bottom_nav_bar/persistent_tab_view.dart";
 
 // Import View
-import "package:atmabakerymobile/view/generalView/onBoarding.dart";
+// import "package:atmabakerymobile/view/generalView/onBoarding.dart";
 import "package:atmabakerymobile/view/CustomerView/CustomerHomepage/CustomerHome.dart";
 import "package:atmabakerymobile/view/CustomerView/CustomerHomepage/CustomerSettings.dart";
 import "package:atmabakerymobile/view/CustomerView/CustomerHomepage/CustomerSearchPage.dart";
+import "package:atmabakerymobile/view/CustomerView/CustomerHistory/showHistory.dart";
+import "package:atmabakerymobile/view/CustomerView/CustomerHistory/CustomerHistorySelesai/showHistoryDikirim.dart";
 import "package:atmabakerymobile/view/CustomerView/CustomerHomepage/CustomerBrowse.dart";
 
 class NavBarController extends StatelessWidget {
@@ -26,7 +28,8 @@ class NavBarController extends StatelessWidget {
         const CustomerHomePage(),
         //const SearchFromHomePage(),
         const BrowseView(),
-        const OnBoarding(),
+        const ShowHistory(),
+        const ShowHistorySelesai(),
         const SettingsPage(),
       ];
     }
@@ -49,8 +52,15 @@ class NavBarController extends StatelessWidget {
           inactiveColorPrimary: CupertinoColors.systemGrey,
         ),
         PersistentBottomNavBarItem(
-          icon: const Icon(CupertinoIcons.cart),
-          title: ("Cart"),
+          icon: const Icon(CupertinoIcons.square_list),
+          title: ("History"),
+          // activeColorPrimary: CupertinoColors.activeGreen,
+          activeColorPrimary: CupertinoColors.black,
+          inactiveColorPrimary: CupertinoColors.systemGrey,
+        ),
+        PersistentBottomNavBarItem(
+          icon: const Icon(CupertinoIcons.cart_fill_badge_plus),
+          title: ("On Delivery"),
           // activeColorPrimary: CupertinoColors.activeGreen,
           activeColorPrimary: CupertinoColors.black,
           inactiveColorPrimary: CupertinoColors.systemGrey,

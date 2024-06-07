@@ -26,6 +26,8 @@ class CustomerHelper {
         }
       );
 
+      print(apiResult.body);
+
       if (apiResult.statusCode == 200) {
         return Customer.fromJson(json.decode(apiResult.body)['data']);
       } else {

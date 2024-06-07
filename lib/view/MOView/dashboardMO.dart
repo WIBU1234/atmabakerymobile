@@ -74,7 +74,12 @@ class _DashboardMOPageState extends State<DashboardMOPage> {
         ),
         BottomNavigationBarItem(
           icon: Icon(Icons.article),
-          label: 'Laporan',
+          label: 'Laporan PP',
+          backgroundColor: Color(0xFFC67C4E),
+        ),
+        BottomNavigationBarItem(
+          icon: Icon(Icons.article),
+          label: 'Laporan PBB',
           backgroundColor: Color(0xFFC67C4E),
         ),
       ],

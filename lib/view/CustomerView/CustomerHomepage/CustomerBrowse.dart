@@ -99,7 +99,8 @@ class _BrowseViewState extends State<BrowseView> {
                                             cloudinary: cld,
                                             publicId: product.Gambar,
                                           )
-                                        : Icon(Icons.image, size: 50, color: Colors.grey),
+                                        : Icon(Icons.image,
+                                            size: 50, color: Colors.grey),
                                   ),
                                   SizedBox(height: 8.0),
                                   Text(
@@ -111,14 +112,17 @@ class _BrowseViewState extends State<BrowseView> {
                                   ),
                                   SizedBox(height: 4.0),
                                   Row(
-                                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceEvenly,
                                     children: [
                                       if (product.ID_Kategori != 4)
                                         Container(
-                                          padding: EdgeInsets.symmetric(horizontal: 8.0, vertical: 4.0),
+                                          padding: EdgeInsets.symmetric(
+                                              horizontal: 8.0, vertical: 4.0),
                                           decoration: BoxDecoration(
                                             color: Colors.grey,
-                                            borderRadius: BorderRadius.circular(12.0),
+                                            borderRadius:
+                                                BorderRadius.circular(12.0),
                                           ),
                                           child: Text(
                                             '${product.Stok}',
@@ -131,10 +135,12 @@ class _BrowseViewState extends State<BrowseView> {
                                         ),
                                       if (product.StokReady > 0)
                                         Container(
-                                          padding: EdgeInsets.symmetric(horizontal: 8.0, vertical: 4.0),
+                                          padding: EdgeInsets.symmetric(
+                                              horizontal: 8.0, vertical: 4.0),
                                           decoration: BoxDecoration(
                                             color: Colors.orange,
-                                            borderRadius: BorderRadius.circular(12.0),
+                                            borderRadius:
+                                                BorderRadius.circular(12.0),
                                           ),
                                           child: Text(
                                             '${product.StokReady}',

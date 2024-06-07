@@ -13,15 +13,15 @@ class ShowHistory extends StatefulWidget {
 class _ShowHistoryState extends State<ShowHistory> {
   List<History> listHistory = [];
   bool isLoading = true;
-  bool  isProses = true;
+  bool isProses = true;
   final searchProduk = TextEditingController();
 
   String search = '';
 
   void onChange(String newSearch) {
-      setState(() {
-        search = newSearch;
-      });
+    setState(() {
+      search = newSearch;
+    });
   }
 
   void loadData() async {
@@ -59,7 +59,8 @@ class _ShowHistoryState extends State<ShowHistory> {
             : Column(
                 children: [
                   Container(
-                    margin: const EdgeInsets.only(top: 20, bottom: 20, left: 20, right: 20),
+                    margin: const EdgeInsets.only(
+                        top: 20, bottom: 20, left: 20, right: 20),
                     child: const Text(
                       'Data History',
                       style: TextStyle(
@@ -69,75 +70,93 @@ class _ShowHistoryState extends State<ShowHistory> {
                     ),
                   ),
                   Container(
-                  margin: const EdgeInsets.only(top: 20 , bottom: 20, left: 50, right: 50),
-                  child: TextFormField(
-                    controller: searchProduk,
-                    decoration: InputDecoration(
-                      border: const OutlineInputBorder(
-                        borderRadius: BorderRadius.all(Radius.circular(40)),
-                        gapPadding: BorderSide.strokeAlignCenter,
-                      ),
-                      labelText: 'Cari produk',
-                      suffixIcon: GestureDetector(
-                        onTap:() {
-                          setState(() {
-                            HistoryHelper.search(Nama_produk: searchProduk.text);
-                            loadData();
-                          });
-                        },
-                        child: const Icon(Icons.search),
+                    margin: const EdgeInsets.only(
+                        top: 20, bottom: 20, left: 50, right: 50),
+                    child: TextFormField(
+                      controller: searchProduk,
+                      decoration: InputDecoration(
+                        border: const OutlineInputBorder(
+                          borderRadius: BorderRadius.all(Radius.circular(40)),
+                          gapPadding: BorderSide.strokeAlignCenter,
+                        ),
+                        labelText: 'Cari produk',
+                        suffixIcon: GestureDetector(
+                          onTap: () {
+                            setState(() {
+                              HistoryHelper.search(
+                                  Nama_produk: searchProduk.text);
+                              loadData();
+                            });
+                          },
+                          child: const Icon(Icons.search),
+                        ),
                       ),
                     ),
                   ),
-                ),
-                Container(
-                  child: isProses ? (
-                    const Center(
-                      child: CircularProgressIndicator(),
-                    ) 
-                  ) : (
-                    Container(
-                      child: listHistory.isEmpty ? (
-                        const Text('Data Tidak Ditemukan')
-                      ) : (
-                        // ignore: avoid_unnecessary_containers
-                        Container(
-                          child: ListView.builder(
-                            shrinkWrap: true,
-                            physics: const NeverScrollableScrollPhysics(),
-                            itemCount: listHistory.length,
-                            itemBuilder: (context, index) {
-                              return Container(
-                                margin: const EdgeInsets.only(left: 20, right: 20, bottom: 10),
-                                height: 100,
-                                width: double.infinity,
-                                color: Colors.grey[200],
-                                child: ListTile(
-                                  title: Column(
-                                    crossAxisAlignment: CrossAxisAlignment.start,
-                                    children: [
-                                      Text(listHistory[index].ID_Transaksi.toString()),
-                                      Text(listHistory[index].Nama_Produk.toString()),
-                                      Text(listHistory[index].Tanggal_Transaksi.toString()),
-                                    ],
-                                  ),
-                                  trailing: Column(
-                                    mainAxisSize: MainAxisSize.min,
-                                    crossAxisAlignment: CrossAxisAlignment.end,
-                                    children: [
-                                      Text(listHistory[index].Total_Transaksi.toString(), style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 13)),
-                                      Text(listHistory[index].Status.toString())
-                                    ]
-                                  ),
-                                ),
-                              ); 
-                            },
-                          ),
-                        )
-                      )
-                    ) 
-                  )
-                )
+                  Container(
+                      child: isProses
+                          ? (const Center(
+                              child: CircularProgressIndicator(),
+                            ))
+                          : (Container(
+                              child: listHistory.isEmpty
+                                  ? (const Text('Data Tidak Ditemukan'))
+                                  : (
+                                      // ignore: avoid_unnecessary_containers
+                                      Container(
+                                      child: ListView.builder(
+                                        shrinkWrap: true,
+                                        physics:
+                                            const NeverScrollableScrollPhysics(),
+                                        itemCount: listHistory.length,
+                                        itemBuilder: (context, index) {
+                                          return Container(
+                                            margin: const EdgeInsets.only(
+                                                left: 20,
+                                                right: 20,
+                                                bottom: 10),
+                                            height: 100,
+                                            width: double.infinity,
+                                            color: Colors.grey[200],
+                                            child: ListTile(
+                                              title: Column(
+                                                crossAxisAlignment:
+                                                    CrossAxisAlignment.start,
+                                                children: [
+                                                  Text(listHistory[index]
+                                                      .ID_Transaksi
+                                                      .toString()),
+                                                  Text(listHistory[index]
+                                                      .Nama_Produk
+                                                      .toString()),
+                                                  Text(listHistory[index]
+                                                      .Tanggal_Transaksi
+                                                      .toString()),
+                                                ],
+                                              ),
+                                              trailing: Column(
+                                                  mainAxisSize:
+                                                      MainAxisSize.min,
+                                                  crossAxisAlignment:
+                                                      CrossAxisAlignment.end,
+                                                  children: [
+                                                    Text(
+                                                        listHistory[index]
+                                                            .Total_Transaksi
+                                                            .toString(),
+                                                        style: const TextStyle(
+                                                            fontWeight:
+                                                                FontWeight.bold,
+                                                            fontSize: 13)),
+                                                    Text(listHistory[index]
+                                                        .Status
+                                                        .toString())
+                                                  ]),
+                                            ),
+                                          );
+                                        },
+                                      ),
+                                    )))))
                 ],
               ),
       ),

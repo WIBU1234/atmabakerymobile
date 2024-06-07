@@ -19,11 +19,12 @@ class HistoryHelper {
       Uri.parse(apiURL),
       headers: {
         "Content-Type": "application/json",
-        "Authorization": "Bearer $token"},
+        "Authorization": "Bearer $token"
+      },
     );
-    
+
     final jsonResponse = json.decode(apiResult.body);
-    if(jsonResponse['data'] != null) {
+    if (jsonResponse['data'] != null) {
       Iterable list = json.decode(apiResult.body)['data'];
       return list.map((e) => History.fromJson(e)).toList();
     } else {
@@ -40,21 +41,22 @@ class HistoryHelper {
         Uri.parse(apiURL),
         headers: {
           "Content-Type": "application/json",
-          "Authorization": "Bearer $token"},
+          "Authorization": "Bearer $token"
+        },
       );
 
-      if(apiResult.statusCode == 200) {
+      if (apiResult.statusCode == 200) {
         Iterable list = json.decode(apiResult.body)['data'];
         return list.map((e) => History.fromJson(e)).toList();
       } else {
         return <History>[];
       }
-    } catch(e) {
+    } catch (e) {
       throw Exception(e.toString());
     }
   }
 
-  static Future<List<History>> getTransaksiOnDelivery () async {
+  static Future<List<History>> getTransaksiOnDelivery() async {
     String apiURL = 'http://$url$endpoint/customer/transaksi-selesai';
     String token = await LoginHelper().getToken();
 
@@ -62,11 +64,12 @@ class HistoryHelper {
       Uri.parse(apiURL),
       headers: {
         "Content-Type": "application/json",
-        "Authorization": "Bearer $token"},
+        "Authorization": "Bearer $token"
+      },
     );
 
     final jsonResponse = json.decode(apiResult.body);
-    if(jsonResponse['data'] != null) {
+    if (jsonResponse['data'] != null) {
       Iterable list = json.decode(apiResult.body)['data'];
       return list.map((e) => History.fromJson(e)).toList();
     } else {
@@ -74,8 +77,10 @@ class HistoryHelper {
     }
   }
 
-  static Future<History> putTransaksiSelesai ({required String? id_transaksi}) async {
-    String apiURL = 'http://$url$endpoint/customer/confirm-transaksi-selesai/$id_transaksi';
+  static Future<History> putTransaksiSelesai(
+      {required String? id_transaksi}) async {
+    String apiURL =
+        'http://$url$endpoint/customer/confirm-transaksi-selesai/$id_transaksi';
     String token = await LoginHelper().getToken();
 
     var apiResult = await client.put(
@@ -84,9 +89,7 @@ class HistoryHelper {
         "Content-Type": "application/json",
         "Authorization": "Bearer $token"
       },
-      body: jsonEncode({
-        "ID_Transaksi": id_transaksi
-      }),
+      body: jsonEncode({"ID_Transaksi": id_transaksi}),
     );
 
     if (apiResult.statusCode == 200) {

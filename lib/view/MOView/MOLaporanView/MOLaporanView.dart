@@ -7,6 +7,7 @@ import 'package:top_snackbar_flutter/top_snack_bar.dart';
 import 'package:atmabakerymobile/entity/customResult.dart';
 import 'package:atmabakerymobile/entity/laporanModel.dart';
 import 'package:atmabakerymobile/apiFunction/laporanFunction.dart';
+import 'package:atmabakerymobile/view/MOView/MOLaporanView/pdfLaporanCreate.dart';
 
 class MOLaporanViewPage extends StatefulWidget {
   const MOLaporanViewPage({super.key});
@@ -57,7 +58,10 @@ class _MOLaporanViewPageState extends State<MOLaporanViewPage> {
           message: 'Success send data',
         ),
       );
-    } else {
+
+    createPdf(context, report);
+
+    }else{
       showTopSnackBar(
         Overlay.of(context),
         CustomSnackBar.error(
